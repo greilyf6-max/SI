@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G glow | Skincare Natural - Cuidado Real para tu Piel</title>
+  <meta name="description" content="G glow - Cuidado de la piel con productos de skincare de alta calidad. Cremas, sérums, mascarillas y más para hidratar y proteger tu piel.">
+  <link rel="icon" type="image/png" href="images/logo originall.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+ 
+
+</head>
+<body>
+  
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- Header  -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="index.html" class="logo-link" aria-label="G glow - Página de inicio">
+        <img src="images/logo originall.png" alt="Logo de G glow" class="logo">
+      </a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link" aria-current="page">Inicio</a></li>
+       
+        <li><a href="Cremas.html" class="nav-link">Cremas</a></li>
+        <li><a href="Limpiadores.html" class="nav-link">Limpiadores</a></li>
+        <li><a href="Tonicos.html" class="nav-link">Tónicos</a></li>
+        <li><a href="Protectores solares.html" class="nav-link">Protectores solares</a></li>
+        <li><a href="Serums.html" class="nav-link">Sérums</a></li>
+        <li><a href="Contorno de ojos.html" class="nav-link">Contorno de ojos</a></li>
+        <li><a href="Exfoliantes.html" class="nav-link">Exfoliantes</a></li>
+        <li><a href="Mascarillas.html" class="nav-link">Mascarillas</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" aria-labelledby="hero-title">
+    <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="video/VideoNuevoPagWeb.mp4" type="video/mp4">
+    </video>
+    
+    <div class="hero-overlay" aria-hidden="true"></div>
+    
+    <div class="hero-content">
+      <h1 id="hero-title" class="hero-title">Cuidado real para tu piel</h1>
+      <p class="hero-description">Descubre el poder de los ingredientes naturales. Skincare pensado para hidratar, proteger y resaltar tu belleza natural cada día.</p>
+      <a href="Cremas.html" class="btn btn-primary">Explorar productos</a>
+    </div>
+  </section>
+
+  <!-- Contenido Principal -->
+  <main id="main-content">
+    
+    <!-- Showcase de Productos -->
+    <section class="product-showcase section" aria-labelledby="showcase-title">
+      <h2 id="showcase-title" class="visually-hidden">Galería de productos</h2>
+      <img src="images/Imagen principal profesional.png" 
+           alt="Colección completa de productos G glow" 
+           class="product-image">
+    </section>
+
+    <!-- Carrusel de Destacados sencillo -->
+    <section class="destacados-section section" aria-labelledby="destacados-title">
+      <h2 id="destacados-title">Destacados</h2>
+      <div class="carrusel">
+        <div class="carrusel-container" id="carrusel">
+          <img src="images/crema 3.avif" alt="CeraVe Moisturising Lotion">
+          <img src="images/serum4.avif" alt="La Roche-Posay Effaclar Ultra Concentrated Serum">
+          <img src="images/toni1.avif" alt="L'Oreal Revitalif Tónico Rellenador">
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Informativo -->
+    <section class="video-section section" aria-labelledby="video-title">
+      <h2 id="video-title" class="section-title">Descubre más sobre el skincare</h2>
+      <p class="section-subtitle">Aprende cómo cuidar tu piel de manera efectiva</p>
+      
+      <div class="video-container">
+        <video class="video-player" controls preload="metadata">
+          <source src="video/VideoNuevoPagWeb.mp4" type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
+    </section>
+
+    <!-- Carrusel de Productos en Oferta -->
+    <section class="carousel-section section" aria-labelledby="carousel-title">
+      <div class="section-header">
+        <h2 id="carousel-title" class="section-title">🎁 Productos en Oferta</h2>
+        <p class="section-subtitle">Descubre increíbles descuentos en nuestros productos favoritos</p>
+      </div>
+      
+      <div class="carousel-wrapper">
+        <button class="nav-btn prev" id="prevBtn" aria-label="Anterior">&#8592;</button>
+        <div class="carousel-outer">
+          <div class="carousel-track" id="track">
+
+            <div class="kit-card product-card-item" data-product-id="1" data-product-name="CeraVe Moisturising Lotion" data-product-brand="CeraVe" data-product-price="$38" data-product-desc="Loción hidratante ligera formulada con ceramidas y ácido hialurónico. Restaura y mantiene la barrera cutánea natural de tu piel para una hidratación duradera." data-product-tags="Piel Seca,Hidratación">
+              <span class="kit-badge green">Oferta</span>
+              <div class="kit-image"><img src="images/crema 3.avif" alt="CeraVe Moisturising Lotion"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="2" data-product-name="La Roche-Posay Effaclar Ultra Concentrated Serum" data-product-brand="La Roche-Posay" data-product-price="$29" data-product-desc="Sérum ultra concentrado especialmente formulado para pieles con acné. Purifica, reduce brillos y controla el sebo para una piel más clara y saludable." data-product-tags="Acné,Purificante">
+              <span class="kit-badge salmon">Oferta</span>
+              <div class="kit-image"><img src="images/serum4.avif" alt="La Roche-Posay Effaclar Ultra Concentrated Serum"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="3" data-product-name="L'Oreal Revitalif Tónico Rellenador" data-product-brand="L'Oreal" data-product-price="$95" data-product-desc="Tónico rellenador con ácido hialurónico que rellena la piel desde adentro. Minimiza arrugas y proporciona un efecto tensor inmediato para una piel más joven." data-product-tags="Antiarrugas,Relleno">
+              <span class="kit-badge outline">Oferta</span>
+              <div class="kit-image"><img src="images/toni1.avif" alt="L'Oreal Revitalif Tónico Rellenador"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="4" data-product-name="La Roche-Posay Effaclar Gel Moussant Purificant" data-product-brand="La Roche-Posay" data-product-price="$78" data-product-desc="Gel limpiador espumante purificante que elimina impurezas sin resecar. Ideal para pieles grasas y con tendencia al acné, deja la piel limpia y fresca." data-product-tags="Limpieza,Purificante">
+              <span class="kit-badge salmon">Oferta</span>
+              <div class="kit-image"><img src="images/limpiador 2.avif" alt="La Roche-Posay Effaclar Gel Moussant Purificant"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="5" data-product-name="Eucerin Clear Skin for Acne Prone Sunscreen Lotion for Face" data-product-brand="Eucerin" data-product-price="$62" data-product-desc="Protector solar especializado para pieles propensas al acné. Protege contra rayos UV sin obstruir poros ni agravar el acné, con acabado mate." data-product-tags="Protección,Acné">
+              <span class="kit-badge salmon">Oferta</span>
+              <div class="kit-image"><img src="images/pr3.avif" alt="Eucerin Clear Skin for Acne Prone Sunscreen Lotion for Face"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="6" data-product-name="L'Oreal Revitalif Filler más Ácido Hialurónico" data-product-brand="L'Oreal" data-product-price="$180" data-product-desc="Crema relleno intensivo con ácido hialurónico y péptidos. Rellena arrugas profundas, reafirma la piel y restaura el volumen perdido con resultados visibles." data-product-tags="Relleno,Volumizador">
+              <span class="kit-badge green">Oferta</span>
+              <div class="kit-image"><img src="images/serum8.avif" alt="L'Oreal Revitalif Filler más Ácido Hialurónico"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="7" data-product-name="Hyalogyc Facial Toner with Hialuronic Acid with Hazel and Aloe Vera" data-product-brand="Hyalogyc" data-product-price="$54" data-product-desc="Tónico facial refrescante con ácido hialurónico, hamamelis y aloe vera. Equilibra el pH, hidrata y calma la piel con ingredientes naturales suavizantes." data-product-tags="Hidratación,Natural">
+              <span class="kit-badge salmon">Oferta</span>
+              <div class="kit-image"><img src="images/toni3.avif" alt="Hyalogyc Facial Toner with Hialuronic Acid with Hazel and Aloe Vera"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="8" data-product-name="Cetaphil Daily Facial Cleanser" data-product-brand="Cetaphil" data-product-price="$45" data-product-desc="Limpiador facial suave diario recomendado por dermatólogos. Elimina impurezas sin resecar ni irritar, ideal para todo tipo de piel incluso sensible." data-product-tags="Suave,Diario">
+              <span class="kit-badge outline">Oferta</span>
+              <div class="kit-image"><img src="images/limpiador 5.avif" alt="Cetaphil Daily Facial Cleanser"></div>
+            </div>
+
+          </div>
+        </div>
+        <button class="nav-btn next" id="nextBtn" aria-label="Siguiente">&#8594;</button>
+      </div>
+
+      <div class="carousel-dots" id="dots"></div>
+    </section>
+
+    <!-- Modal de Detalles del Producto -->
+    <div id="productModal" class="product-modal">
+      <div class="modal-content">
+        <button class="modal-close" id="closeModal">&times;</button>
+        <div class="modal-body">
+          <div class="modal-image">
+            <img id="modalImage" src="" alt="Producto">
+          </div>
+          <div class="modal-details">
+            <span id="modalBrand" class="modal-brand"></span>
+            <h2 id="modalName" class="modal-title"></h2>
+            <p id="modalDesc" class="modal-description"></p>
+            <div id="modalTags" class="modal-tags"></div>
+            <div class="modal-footer">
+              <span id="modalPrice" class="modal-price"></span>
+              <button class="modal-btn" onclick="addToCart(document.getElementById('modalName').textContent, extractPrice(document.getElementById('modalPrice').textContent))">Agregar al Carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Combos Especiales -->
+    <section class="featured-combos section" aria-labelledby="combos-title">
+      <h2 id="combos-title" class="section-title">Combos Especiales</h2>
+      <p class="section-subtitle">Rutinas completas diseñadas para resultados visibles</p>
+      
+      <div class="combo-grid">
+        <article class="combo-card">
+          <img src="images/combo 2 ....webp" 
+               alt="Set de limpieza profunda" 
+               class="combo-image">
+          <h3 class="combo-title">Combo limpieza profunda</h3>
+        </article>
+        
+        <article class="combo-card">
+          <img src="images/combo 3 ....jpg" 
+               alt="Set hidratante completo" 
+               class="combo-image">
+          <h3 class="combo-title">Combo hidratante</h3>
+        </article>
+      </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="benefits-section section" aria-labelledby="benefits-title">
+      <h2 id="benefits-title" class="section-title">¿Por qué elegir G glow?</h2>
+      <p class="section-subtitle">Siempre comprometidos con tu piel</p>
+      
+      <div class="benefits-grid">
+        <article class="benefit-card">
+          <span class="benefit-icon" aria-hidden="true"><i class="fas fa-leaf"></i></span>
+          <h3 class="benefit-title">Productos de calidad</h3>
+          <p class="benefit-description">Ingredientes cuidadosamente seleccionados, suaves y efectivos para todo tipo de piel.</p>
+        </article>
+        
+        <article class="benefit-card">
+          <span class="benefit-icon" aria-hidden="true"><i class="fas fa-droplet"></i></span>
+          <h3 class="benefit-title">Cuidado especializado</h3>
+          <p class="benefit-description">Cada producto está formulado científicamente para hidratar, proteger y revitalizar tu piel.</p>
+        </article>
+        
+        <article class="benefit-card">
+          <span class="benefit-icon" aria-hidden="true"><i class="fas fa-star"></i></span>
+          <h3 class="benefit-title">Resultados reales</h3>
+          <p class="benefit-description">Miles de clientes satisfechos con resultados visibles desde la primera semana.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonials-section section" aria-labelledby="testimonials-title">
+      <h2 id="testimonials-title" class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-subtitle">Historias reales de transformación</p>
+      
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <blockquote>
+            <p class="testimonial-text">Los productos de las marcas que vende G glow han transformado completamente mi piel. Después de solo 3 semanas, mi piel se ve más radiante y saludable.</p>
+            <footer>
+              <cite class="testimonial-author">María González</cite>
+              <div class="testimonial-rating" aria-label="Calificación: 5 de 5 estrellas">★★★★★</div>
+            </footer>
+          </blockquote>
+        </article>
+        
+        <article class="testimonial-card">
+          <blockquote>
+            <p class="testimonial-text">Tengo piel sensible y finalmente encontré productos buenos que no me irritan. ¡Es increíble!</p>
+            <footer>
+              <cite class="testimonial-author">Ana Rodríguez</cite>
+              <div class="testimonial-rating" aria-label="Calificación: 5 de 5 estrellas">★★★★★</div>
+            </footer>
+          </blockquote>
+        </article>
+        
+        <article class="testimonial-card">
+          <blockquote>
+            <p class="testimonial-text">El combo de limpieza profunda es lo mejor que he probado. Mi piel nunca se había sentido tan limpia y fresca. 100% recomendado.</p>
+            <footer>
+              <cite class="testimonial-author">Carmen Pérez</cite>
+              <div class="testimonial-rating" aria-label="Calificación: 5 de 5 estrellas">★★★★★</div>
+            </footer>
+          </blockquote>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section section" aria-labelledby="cta-title">
+      <h2 id="cta-title" class="section-title">¿Lista para transformar tu piel?</h2>
+      <p class="cta-description">Únete a miles de mujeres que ya descubrieron el secreto de una piel radiante</p>
+      <a href="Cremas.html" class="btn btn-secondary">Ver todos los productos</a>
+    </section>
+
+  </main>
+
+  <!-- Modal del Carrito -->
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-modal-content">
+      <div class="cart-modal-header">
+        <h2>Mi Carrito</h2>
+        <button class="cart-modal-close" id="closeCartModal">&times;</button>
+      </div>
+      <div class="cart-modal-body" id="cartModalBody">
+        <div class="empty-cart-message">
+          <i class="fas fa-shopping-cart"></i>
+          <p>Tu carrito está vacío</p>
+        </div>
+      </div>
+      <div class="cart-modal-footer" id="cartModalFooter" style="display: none;">
+        <div class="cart-total">
+          <strong>Total: <span id="cartTotal">$0</span></strong>
+        </div>
+        <button class="btn btn-primary" style="width: 100%;">Proceder al pago</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-grid">
+        
+        <div class="footer-column">
+          <h3>G glow</h3>
+          <p>Cuidado real para tu piel. Productos naturales de alta calidad que transforman tu rutina de skincare.</p>
+        </div>
+        
+        <nav class="footer-column" aria-labelledby="footer-nav-title">
+          <h3 id="footer-nav-title">Navegación</h3>
+          <ul class="footer-nav">
+            <li><a href="index.html" class="footer-link">Inicio</a></li>
+            <li><a href="Cremas.html" class="footer-link">Cremas</a></li>
+            <li><a href="Serums.html" class="footer-link">Sérums</a></li>
+            <li><a href="Limpiadores.html" class="footer-link">Limpiadores</a></li>
+            <li><a href="Mascarillas.html" class="footer-link">Mascarillas</a></li>
+          </ul>
+        </nav>
+        
+        <div class="footer-column">
+          <h3>Contacto</h3>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> República Dominicana</li>
+            <li><a href="tel:+18294849081" class="footer-link"><i class="fas fa-phone"></i> +1 (829) 484-9081</a></li>
+            <li><a href="mailto:gglow12@gmail.com" class="footer-link"><i class="fas fa-envelope"></i> gglow12@gmail.com</a></li>
+            <li><i class="fas fa-clock"></i> Lun - Sáb: 8am - 5pm</li>
+          </ul>
+        </div>
+        
+        <nav class="footer-column" aria-labelledby="social-title">
+          <h3 id="social-title">Síguenos</h3>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="https://wa.me/18294849081" class="social-link">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </nav>
+        
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 G glow - Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón Scroll to Top -->
+  <a href="#" class="scroll-to-top" aria-label="Volver arriba">↑</a>
+
+  <script>
+    // ─────────────────── FUNCIONALIDAD DEL MODAL DE PRODUCTOS ─────────────────── 
+    const productModal = document.getElementById('productModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const productCards = document.querySelectorAll('.product-card-item');
+
+    function extractPrice(priceString) {
+      const match = priceString.match(/\d+/);
+      return match ? parseInt(match[0]) : 0;
+    }
+
+    // Abrir modal
+    productCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const productId = this.dataset.productId;
+        const productName = this.dataset.productName;
+        const productBrand = this.dataset.productBrand;
+        const productPrice = this.dataset.productPrice;
+        const productDesc = this.dataset.productDesc;
+        const productTags = this.dataset.productTags.split(',');
+        const imgSrc = this.querySelector('img').src;
+
+        // Actualizar modal con datos
+        document.getElementById('modalImage').src = imgSrc;
+        document.getElementById('modalImage').alt = productName;
+        document.getElementById('modalBrand').textContent = productBrand;
+        document.getElementById('modalName').textContent = productName;
+        document.getElementById('modalPrice').textContent = productPrice;
+        document.getElementById('modalDesc').textContent = productDesc;
+
+        // Generar tags
+        const tagsContainer = document.getElementById('modalTags');
+        tagsContainer.innerHTML = '';
+        productTags.forEach(tag => {
+          const tagEl = document.createElement('span');
+          tagEl.className = 'modal-tag';
+          tagEl.textContent = tag.trim();
+          tagsContainer.appendChild(tagEl);
+        });
+
+        // Mostrar modal
+        productModal.classList.add('active');
+      });
+    });
+
+    // Cerrar modal
+    closeModalBtn.addEventListener('click', () => {
+      productModal.classList.remove('active');
+    });
+
+    // Cerrar modal al hacer clic fuera
+    productModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        productModal.classList.remove('active');
+      }
+    });
+
+    // Cerrar modal con tecla Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        productModal.classList.remove('active');
+      }
+    });
+
+    // Scroll to top functionality
+    const scrollBtn = document.querySelector('.scroll-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollBtn.classList.add('visible');
+      } else {
+        scrollBtn.classList.remove('visible');
+      }
+    });
+
+    scrollBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // ─────────────────── CARRUSEL JAVASCRIPT ─────────────────── 
+    const track   = document.getElementById('track');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsEl  = document.getElementById('dots');
+    const cards   = Array.from(track.children);
+    let current   = 0;
+
+    function visibleCount() {
+      const w = window.innerWidth;
+      if (w <= 540) return 1;
+      if (w <= 860) return 2;
+      return 3;
+    }
+
+    function maxIndex() { return cards.length - visibleCount(); }
+
+    function buildDots() {
+      dotsEl.innerHTML = '';
+      for (let i = 0; i <= maxIndex(); i++) {
+        const d = document.createElement('button');
+        d.className = 'dot' + (i === current ? ' active' : '');
+        d.setAttribute('aria-label', `Producto ${i + 1}`);
+        d.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(d);
+      }
+    }
+
+    function updateDots() {
+      Array.from(dotsEl.children).forEach((d, i) =>
+        d.classList.toggle('active', i === current));
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(index, maxIndex()));
+      const cardW = cards[0].getBoundingClientRect().width;
+      track.style.transform = `translateX(-${current * (cardW + 22)}px)`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === maxIndex();
+      updateDots();
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    let tx = 0;
+    track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   e => {
+      const diff = tx - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+    });
+
+    window.addEventListener('resize', () => { buildDots(); goTo(Math.min(current, maxIndex())); });
+    buildDots();
+    goTo(0);
+
+    // Variable global para carrito
+    let cart = [];
+
+    // Cargar carrito desde localStorage
+    function loadCart() {
+      const saved = localStorage.getItem('cartItems');
+      cart = saved ? JSON.parse(saved) : [];
+      updateCartUI();
+    }
+
+    // Guardar carrito en localStorage
+    function saveCart() {
+      localStorage.setItem('cartItems', JSON.stringify(cart));
+    }
+
+    // Agregar producto al carrito
+    function addToCart(name, price) {
+      const item = {
+        name: name,
+        price: price,
+        id: Date.now(),
+        quantity: 1
+      };
+      cart.push(item);
+      saveCart();
+      updateCartUI();
+      productModal.classList.remove('active');
+      showNotification(`"${name}" agregado al carrito`);
+    }
+
+    // Actualizar UI del carrito
+    function updateCartUI() {
+      const cartBtn = document.getElementById('cartCount');
+      cartBtn.textContent = cart.length;
+
+      const cartBody = document.getElementById('cartModalBody');
+      const cartFooter = document.getElementById('cartModalFooter');
+
+      if (cart.length === 0) {
+        cartBody.innerHTML = `
+          <div class="empty-cart-message">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Tu carrito está vacío</p>
+          </div>
+        `;
+        cartFooter.style.display = 'none';
+      } else {
+        let html = '<div class="cart-items-list">';
+        let total = 0;
+
+        cart.forEach((item, index) => {
+          total += item.price;
+          html += `
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p class="cart-item-price">$${item.price}</p>
+              </div>
+              <button class="cart-item-remove" onclick="removeFromCart(${index})" aria-label="Eliminar ${item.name}">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          `;
+        });
+
+        html += '</div>';
+        cartBody.innerHTML = html;
+
+        document.getElementById('cartTotal').textContent = '$' + total;
+        cartFooter.style.display = 'block';
+      }
+    }
+
+    // Eliminar producto del carrito
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      saveCart();
+      updateCartUI();
+    }
+
+    // Mostrar notificación
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.textContent = message;
+      notification.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #4a9d6a;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+      `;
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+
+    // Event listeners del carrito
+    const cartBtn = document.getElementById('cartBtn');
+    const cartModal = document.getElementById('cartModal');
+    const closeCartModal = document.getElementById('closeCartModal');
+
+    cartBtn.addEventListener('click', () => {
+      cartModal.classList.add('active');
+    });
+
+    closeCartModal.addEventListener('click', () => {
+      cartModal.classList.remove('active');
+    });
+
+    cartModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        cartModal.classList.remove('active');
+      }
+    });
+
+    // Cerrar carrito con Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && cartModal.classList.contains('active')) {
+        cartModal.classList.remove('active');
+      }
+    });
+
+    // Cargar carrito al iniciar
+    loadCart();
+  </script>
+
+  <script src="cart.js"></script>
+  <!-- Script adicional para el carrusel de destacados -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protectores Solares - G glow</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #ffffff, #e5b5b5);
+            min-height: 100vh;
+        }
+
+        /* Navegación */
+        nav {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            padding: 15px 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .logo img {
+            height: 60px;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Botón del carrito */
+        .cart-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(45, 95, 63, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(45, 95, 63, 0.5);
+        }
+
+        .cart-count {
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Modal del carrito */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-modal.active {
+            display: flex;
+        }
+
+        .cart-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4a9d6a;
+        }
+
+        .cart-header h2 {
+            color: #2d5f3f;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: #ff6b6b;
+        }
+
+        .cart-items {
+            margin: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .cart-item:hover {
+            background: #e9f5ee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #2d5f3f;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #4a9d6a;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .remove-item:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #4a9d6a;
+            text-align: right;
+        }
+
+        .cart-total h3 {
+            color: #2d5f3f;
+            font-size: 24px;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(45, 95, 63, 0.4);
+        }
+
+        /* Título principal */
+        h1 {
+            text-align: center;
+            color: #2d5f3f;
+            padding: 40px 20px;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Grid de productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            color: #2d5f3f;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            color: #4a9d6a;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 95, 63, 0.3);
+        }
+
+        .add-to-cart:active {
+            transform: translateY(0);
+        }
+
+        /* Badge de SPF */
+        .spf-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #2d5f3f;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .empty-cart-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .cart-button {
+                top: 10px;
+                right: 10px;
+                padding: 12px 20px;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+        
+            <a href="Cremas.html">Cremas</a>
+            <a href="Limpiadores.html">Limpiadores</a>
+            <a href="Tonicos.html">Tónicos</a>
+            <a href="Protectores solares.html" class="active">Protectores solares</a>
+            <a href="Serums.html">Sérums</a>
+            <a href="Contorno de ojos.html">Contorno de ojos</a>
+            <a href="Exfoliantes.html">Exfoliantes</a>
+            <a href="Mascarillas.html">Mascarillas</a>
+        </div>
+        <div class="logo">
+            <img src="images/logo originall.png" alt="Logo">
+        </div>
+    </nav>
+
+    <!-- Botón del carrito -->
+    <button class="cart-button old-cart" style="display:none;" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i> Carrito
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- Modal del carrito -->
+    <div class="cart-modal old-cart-modal" id="cartModal" style="display:none;">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2><i class="fas fa-shopping-cart"></i> Mi Carrito</h2>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <div class="empty-cart-icon"><i class="fas fa-shopping-bag"></i></div>
+                    <p>Tu carrito está vacío</p>
+                </div>
+            </div>
+            <div class="cart-total" id="cartTotal" style="display: none;">
+                <h3>Total: $<span id="totalAmount">0</span></h3>
+                <button class="checkout-btn" onclick="checkout()">Proceder al Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <h1>☀️ Protectores Solares</h1>
+
+    <!-- Grid de productos -->
+    <div class="products-grid" id="products-grid">
+        <div class="product-card">
+            <span class="spf-badge">SPF 50+</span>
+            <img src="images/pr1.webp" alt="Protector Solar 1" class="product-image">
+            <div class="product-info">
+                <div class="product-name">La Roche-Posay Anthelios</div>
+                <div class="product-description">Protección UV avanzada con tecnología Cell-Ox Shield. Ideal para piel sensible.</div>
+                <div class="product-price">$1,250</div>
+                <button class="add-to-cart" onclick="addToCart('La Roche-Posay Anthelios', 1250)">
+                    Añadir al Carrito
+                </button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <span class="spf-badge">SPF 50</span>
+            <img src="images/pr2.jpeg" alt="Protector Solar 2" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Neutrogena Ultra Sheer</div>
+                <div class="product-description">Fórmula ligera de rápida absorción. Resistente al agua y al sudor.</div>
+                <div class="product-price">$890</div>
+                <button class="add-to-cart" onclick="addToCart('Neutrogena Ultra Sheer', 890)">
+                    Añadir al Carrito
+                </button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <span class="spf-badge">SPF 30</span>
+            <img src="images/pr3.avif" alt="Protector Solar 3" class="product-image">
+            <div class="product-info">
+                <div class="product-name">CeraVe Mineral Sunscreen</div>
+                <div class="product-description">Con óxido de zinc y ceramidas. Sin fragancias, ideal para piel sensible.</div>
+                <div class="product-price">$1,100</div>
+                <button class="add-to-cart" onclick="addToCart('CeraVe Mineral Sunscreen', 1100)">
+                    Añadir al Carrito
+                </button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <span class="spf-badge">SPF 50+</span>
+            <img src="images/pr4.jpg" alt="Protector Solar 4" class="product-image">
+            <div class="product-info">
+                <div class="product-name">EltaMD UV Clear</div>
+                <div class="product-description">Protección facial con niacinamida. Reduce rojeces y protege contra rayos UV.</div>
+                <div class="product-price">$1,580</div>
+                <button class="add-to-cart" onclick="addToCart('EltaMD UV Clear', 1580)">
+                    Añadir al Carrito
+                </button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <span class="spf-badge">SPF 45</span>
+            <img src="images/pr5.jpg" alt="Protector Solar 5" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Supergoop! Unseen Sunscreen</div>
+                <div class="product-description">Protector invisible con acabado mate. Perfecto como primer de maquillaje.</div>
+                <div class="product-price">$1,350</div>
+                <button class="add-to-cart" onclick="addToCart('Supergoop! Unseen Sunscreen', 1350)">
+                    Añadir al Carrito
+                </button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <span class="spf-badge">SPF 50</span>
+            <img src="images/pr6.webp" alt="Protector Solar 6" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Isdin Eryfotona Actinica</div>
+                <div class="product-description">Con DNA Repairsomes®. Repara el daño solar y previene el envejecimiento.</div>
+                <div class="product-price">$1,680</div>
+                <button class="add-to-cart" onclick="addToCart('Isdin Eryfotona Actinica', 1680)">
+                    Añadir al Carrito
+                </button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <span class="spf-badge">SPF 50+</span>
+            <img src="images/pr7.jpg" alt="Protector Solar 7" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Eucerin Oil Control</div>
+                <div class="product-description">Toque seco con efecto matificante. Control de brillo hasta 8 horas.</div>
+                <div class="product-price">$980</div>
+                <button class="add-to-cart" onclick="addToCart('Eucerin Oil Control', 980)">
+                    Añadir al Carrito
+                </button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <span class="spf-badge">SPF 50</span>
+            <img src="images/pr8.webp" alt="Protector Solar 8" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Bioré UV Aqua Rich</div>
+                <div class="product-description">Textura gel acuosa ultraligera. Hidratación con ácido hialurónico.</div>
+                <div class="product-price">$750</div>
+                <button class="add-to-cart" onclick="addToCart('Bioré UV Aqua Rich', 750)">
+                    Añadir al Carrito
+                </button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <span class="spf-badge">SPF 50+</span>
+            <img src="images/pr9.webp" alt="Protector Solar 9" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Vichy Idéal Soleil</div>
+                <div class="product-description">Con agua volcánica. Fortalece la barrera cutánea y protege de los rayos UV.</div>
+                <div class="product-price">$1,180</div>
+                <button class="add-to-cart" onclick="addToCart('Vichy Idéal Soleil', 1180)">
+                    Añadir al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+    <script>
+      function addToCart(name, price) {
+        Cart.add({id: name, name: name, price: price});
+      }
+    </script>
+</body>
+</html>
+</body>
+</html>

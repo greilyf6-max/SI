@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contorno de Ojos - G glow | Skincare Natural</title>
+    <meta name="description" content="Descubre nuestra colección de contornos de ojos para reducir ojeras, bolsas y líneas de expresión.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Aquí se aplicaban estilos personalizados; ahora se usa todo style.css -->
+    <style>
+        .cart-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #4a9d6a;
+            text-align: right;
+        }
+
+        .cart-total h3 {
+            color: #2d5f3f;
+            font-size: 24px;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(45, 95, 63, 0.4);
+        }
+
+        /* Título principal */
+        h1 {
+            text-align: center;
+            color: #2d5f3f;
+            padding: 40px 20px;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Grid de productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            color: #2d5f3f;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            color: #4a9d6a;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 95, 63, 0.3);
+        }
+
+        .add-to-cart:active {
+            transform: translateY(0);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .empty-cart-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .cart-button {
+                top: 10px;
+                right: 10px;
+                padding: 12px 20px;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        
+    </style>
+    <link rel="icon" type="image/png" href="images/logo originall.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navegación -->
+    <nav>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            
+            <a href="Cremas.html">Cremas</a>
+            <a href="Limpiadores.html">Limpiadores</a>
+            <a href="Tonicos.html">Tónicos</a>
+            <a href="Protectores solares.html">Protectores solares</a>
+            <a href="Serums.html">Sérums</a>
+            <a href="Contorno de ojos.html" class="active">Contorno de ojos</a>
+            <a href="Exfoliantes.html">Exfoliantes</a>
+            <a href="Mascarillas.html">Mascarillas</a>
+        </div>
+        <div class="logo">
+            <img src="images/logo originall.png" alt="Logo">
+        </div>
+    </nav>
+
+
+    <h1>Contorno de Ojos</h1>
+
+    <!-- Grid de productos -->
+    <div class="products-grid" id="products-grid">
+        <div class="product-card">
+            <img src="images/co4.avif" alt="Contorno Antiedad" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Contorno Antiedad</div>
+                <div class="product-description">Reduce arrugas y líneas de expresión</div>
+                <div class="product-price">$980</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Contorno Antiedad',name:'Contorno Antiedad',price:980})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/co6.avif" alt="Contorno Hidratante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Contorno Hidratante</div>
+                <div class="product-description">Hidratación profunda para contorno</div>
+                <div class="product-price">$920</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Contorno Hidratante',name:'Contorno Hidratante',price:920})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/co4.avif" alt="Contorno Iluminador" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Contorno Iluminador</div>
+                <div class="product-description">Reduce ojeras y aporta luminosidad</div>
+                <div class="product-price">$1050</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Contorno Iluminador',name:'Contorno Iluminador',price:1050})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/co6.avif" alt="Contorno Descongestivo" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Contorno Descongestivo</div>
+                <div class="product-description">Reduce bolsas y descongestiona</div>
+                <div class="product-price">$1150</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Contorno Descongestivo',name:'Contorno Descongestivo',price:1150})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/co4.avif" alt="Contorno Reafirmante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Contorno Reafirmante</div>
+                <div class="product-description">Reafirma y tensa la piel</div>
+                <div class="product-price">$1100</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Contorno Reafirmante',name:'Contorno Reafirmante',price:1100})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/co6.avif" alt="Contorno Nutritivo" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Contorno Nutritivo</div>
+                <div class="product-description">Nutrición intensiva para pieles secas</div>
+                <div class="product-price">$1050</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Contorno Nutritivo',name:'Contorno Nutritivo',price:1050})">Añadir al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+
+<script src="cart.js"></script>
+</body>
+</html>

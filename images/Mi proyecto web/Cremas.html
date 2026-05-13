@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cremas Faciales - G glow | Skincare Natural</title>
+    <meta name="description" content="Descubre nuestra colección de cremas faciales hidratantes y nutritivas para todo tipo de piel.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #ffffff, #e5b5b5);
+            min-height: 100vh;
+        }
+
+        /* Navegación */
+        nav {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            padding: 15px 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .logo img {
+            height: 60px;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Botón del carrito */
+        .cart-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(45, 95, 63, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(45, 95, 63, 0.5);
+        }
+
+        .cart-count {
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Modal del carrito */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-modal.active {
+            display: flex;
+        }
+
+        .cart-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4a9d6a;
+        }
+
+        .cart-header h2 {
+            color: #2d5f3f;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: #ff6b6b;
+        }
+
+        .cart-items {
+            margin: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .cart-item:hover {
+            background: #e9f5ee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #2d5f3f;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #4a9d6a;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .remove-item:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #4a9d6a;
+            text-align: right;
+        }
+
+        .cart-total h3 {
+            color: #2d5f3f;
+            font-size: 24px;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(45, 95, 63, 0.4);
+        }
+
+        /* Título principal */
+        h1 {
+            text-align: center;
+            color: #2d5f3f;
+            padding: 40px 20px;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Grid de productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            color: #2d5f3f;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            color: #4a9d6a;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 95, 63, 0.3);
+        }
+
+        .add-to-cart:active {
+            transform: translateY(0);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .empty-cart-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .cart-button {
+                top: 10px;
+                right: 10px;
+                padding: 12px 20px;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        
+    </style>
+    <link rel="icon" type="image/png" href="images/logo originall.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navegación -->
+    <nav>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+           
+            <a href="Cremas.html" class="active">Cremas</a>
+            <a href="Limpiadores.html">Limpiadores</a>
+            <a href="Tonicos.html">Tónicos</a>
+            <a href="Protectores solares.html">Protectores solares</a>
+            <a href="Serums.html">Sérums</a>
+            <a href="Contorno de ojos.html">Contorno de ojos</a>
+            <a href="Exfoliantes.html">Exfoliantes</a>
+            <a href="Mascarillas.html">Mascarillas</a>
+        </div>
+        <div class="logo">
+            <img src="images/logo originall.png" alt="Logo">
+        </div>
+    </nav>
+
+
+    <h1>Cremas</h1>
+
+    <!-- Grid de productos -->
+    <div class="products-grid" id="products-grid">
+        <div class="product-card">
+            <img src="images/Crema 1.webp" alt="Crema Hidratante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Hidratante</div>
+                <div class="product-description">Hidratación 24 horas para todo tipo de piel</div>
+                <div class="product-price">$850</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Hidratante',name:'Crema Hidratante',price:850})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 2.webp" alt="Crema Nutritiva" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Nutritiva</div>
+                <div class="product-description">Nutrición profunda con vitaminas esenciales</div>
+                <div class="product-price">$920</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Nutritiva',name:'Crema Nutritiva',price:920})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 3.avif" alt="Crema Regeneradora" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Regeneradora</div>
+                <div class="product-description">Regenera y renueva la piel mientras duermes</div>
+                <div class="product-price">$1150</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Regeneradora',name:'Crema Regeneradora',price:1150})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 4.webp" alt="Crema Anti-Edad" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Anti-Edad</div>
+                <div class="product-description">Reduce líneas de expresión y arrugas</div>
+                <div class="product-price">$1350</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Anti-Edad',name:'Crema Anti-Edad',price:1350})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 5.jpg" alt="Crema de Día" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema de Día</div>
+                <div class="product-description">Protección e hidratación todo el día</div>
+                <div class="product-price">$890</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema de Día',name:'Crema de Día',price:890})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 6.jpg" alt="Crema de Noche" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema de Noche</div>
+                <div class="product-description">Reparación intensiva nocturna</div>
+                <div class="product-price">$950</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema de Noche',name:'Crema de Noche',price:950})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 7.jpg" alt="Crema Iluminadora" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Iluminadora</div>
+                <div class="product-description">Aporta luminosidad y brillo natural</div>
+                <div class="product-price">$1050</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Iluminadora',name:'Crema Iluminadora',price:1050})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 8.jpg" alt="Crema Calmante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Calmante</div>
+                <div class="product-description">Calma y reduce rojeces e irritación</div>
+                <div class="product-price">$980</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Calmante',name:'Crema Calmante',price:980})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 9.jpg" alt="Crema Matificante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Matificante</div>
+                <div class="product-description">Controla el brillo y la grasa</div>
+                <div class="product-price">$870</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Matificante',name:'Crema Matificante',price:870})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 10.webp" alt="Crema Reafirmante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Reafirmante</div>
+                <div class="product-description">Reafirma y tonifica la piel</div>
+                <div class="product-price">$1280</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Reafirmante',name:'Crema Reafirmante',price:1280})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 11.jpg" alt="Crema Antioxidante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Antioxidante</div>
+                <div class="product-description">Protege contra radicales libres</div>
+                <div class="product-price">$1100</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Antioxidante',name:'Crema Antioxidante',price:1100})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 12.webp" alt="Crema Despigmentante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Despigmentante</div>
+                <div class="product-description">Reduce manchas y unifica el tono</div>
+                <div class="product-price">$1250</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Despigmentante',name:'Crema Despigmentante',price:1250})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 13.jpg" alt="Crema Revitalizante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Revitalizante</div>
+                <div class="product-description">Revitaliza y da energía a tu piel</div>
+                <div class="product-price">$1020</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Revitalizante',name:'Crema Revitalizante',price:1020})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 14.webp" alt="Crema Protectora" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Protectora</div>
+                <div class="product-description">Barrera protectora contra agresores</div>
+                <div class="product-price">$990</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Protectora',name:'Crema Protectora',price:990})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/crema 15.jpg" alt="Crema Ultra Hidratante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Crema Ultra Hidratante</div>
+                <div class="product-description">Hidratación intensa para piel seca</div>
+                <div class="product-price">$1180</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'Crema Ultra Hidratante',name:'Crema Ultra Hidratante',price:1180})">Añadir al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+</body>
+</html>

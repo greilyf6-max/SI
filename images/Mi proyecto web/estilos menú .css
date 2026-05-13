@@ -1,0 +1,893 @@
+/* =====================================================
+   HERO DE CATEGORÍA
+===================================================== */
+.category-hero {
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,122.7C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom center;
+  background-size: cover;
+  opacity: 0.3;
+}
+
+.category-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.category-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--blanco);
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+
+.category-description {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: var(--blanco);
+  line-height: 1.8;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  opacity: 0.95;
+}
+
+/* =====================================================
+   SECCIÓN DE PRODUCTOS
+===================================================== */
+.products-section {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, var(--color-fondo), var(--blanco));
+}
+
+.products-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+  padding: 0 20px;
+}
+
+/* =====================================================
+   TARJETAS DE PRODUCTO
+===================================================== */
+.product-card {
+  background: var(--blanco);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+  transition: var(--transition-base);
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--sombra-media);
+}
+
+.product-card:focus-within {
+  transform: translateY(-10px);
+  box-shadow: var(--sombra-media);
+  outline: 3px solid var(--color-acento);
+  outline-offset: 4px;
+}
+
+.product-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Ratio 1:1 para imágenes cuadradas */
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(138, 90, 127, 0.05), rgba(184, 126, 163, 0.05));
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.08);
+}
+
+/* Efecto de brillo al hover */
+.product-image-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.product-card:hover .product-image-wrapper::after {
+  left: 100%;
+}
+
+/* =====================================================
+   INFORMACIÓN DEL PRODUCTO
+===================================================== */
+.product-info {
+  padding: 25px;
+  text-align: center;
+}
+
+.product-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primario);
+  margin: 0;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.product-card:hover .product-name {
+  color: var(--color-secundario);
+}
+
+/* Badge opcional (si quieres agregar "Nuevo", "Popular", etc.) */
+.product-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+  color: var(--blanco);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(138, 90, 127, 0.3);
+}
+
+/* =====================================================
+   RESPONSIVE PARA PRODUCTOS
+===================================================== */
+@media (max-width: 1200px) {
+  .products-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-hero {
+    padding: 60px 20px;
+  }
+
+  .products-section {
+    padding: 60px 20px;
+  }
+
+  .products-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 0 10px;
+  }
+
+  .product-info {
+    padding: 20px;
+  }
+
+  .product-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .category-title {
+    font-size: 2rem;
+  }
+
+  .category-description {
+    font-size: 1rem;
+  }
+}
+
+/* =====================================================
+   ANIMACIÓN DE CARGA (Opcional)
+===================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-card {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Delay escalonado para cada producto */
+.product-card:nth-child(1) { animation-delay: 0.05s; }
+.product-card:nth-child(2) { animation-delay: 0.1s; }
+.product-card:nth-child(3) { animation-delay: 0.15s; }
+.product-card:nth-child(4) { animation-delay: 0.2s; }
+.product-card:nth-child(5) { animation-delay: 0.25s; }
+.product-card:nth-child(6) { animation-delay: 0.3s; }
+.product-card:nth-child(7) { animation-delay: 0.35s; }
+.product-card:nth-child(8) { animation-delay: 0.4s; }
+.product-card:nth-child(9) { animation-delay: 0.45s; }
+.product-card:nth-child(10) { animation-delay: 0.5s; }
+.product-card:nth-child(11) { animation-delay: 0.55s; }
+.product-card:nth-child(12) { animation-delay: 0.6s; }
+.product-card:nth-child(13) { animation-delay: 0.65s; }
+.product-card:nth-child(14) { animation-delay: 0.7s; }
+.product-card:nth-child(15) { animation-delay: 0.75s; }
+
+/* Desactivar animaciones si el usuario prefiere reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .product-card {
+    animation: none;
+  }
+  
+  .product-image-wrapper::after {
+    display: none;
+  }
+}="main-content">
+    
+    <!-- Page Header -->
+    <header class="page-header">
+      <h1 class="page-title">Cremas Faciales</h1>
+      <p class="page-description">Descubre nuestra selección de cremas hidratantes y nutritivas, formuladas con ingredientes de alta calidad para el cuidado óptimo de tu piel.</p>
+    </header>
+
+    <!-- Products Grid -->
+    <section class="products-section" aria-labelledby="products-title">
+      <h2 id="products-title" class="visually-hidden">Lista de productos</h2>
+      
+      <div class="products-grid">
+        
+        <!-- Producto 1 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/Crema 1.webp" 
+                 alt="Crema hidratante intensiva para rostro con ácido hialurónico" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Hidratante Intensiva</h3>
+            <p class="product-description">Fórmula avanzada con ácido hialurónico que proporciona hidratación profunda durante 24 horas.</p>
+          </div>
+        </article>
+
+        <!-- Producto 2 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 2.webp" 
+                 alt="Crema nutritiva de noche con vitamina E y colágeno" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Nutritiva Nocturna</h3>
+            <p class="product-description">Tratamiento nocturno enriquecido con vitamina E y colágeno para regenerar la piel mientras duermes.</p>
+          </div>
+        </article>
+
+        <!-- Producto 3 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 3.avif" 
+                 alt="Crema antiedad con retinol y péptidos" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Antiedad Premium</h3>
+            <p class="product-description">Potente fórmula antiedad con retinol y péptidos que reduce visiblemente líneas de expresión.</p>
+          </div>
+        </article>
+
+        <!-- Producto 4 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 4.webp" 
+                 alt="Crema gel matificante para piel grasa" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Gel Matificante</h3>
+            <p class="product-description">Textura ligera que controla el brillo y equilibra la producción de sebo en pieles grasas.</p>
+          </div>
+        </article>
+
+        <!-- Producto 5 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 5.jpg" 
+                 alt="Crema calmante para piel sensible" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Calmante Sensible</h3>
+            <p class="product-description">Fórmula suave e hipoalergénica que calma y protege las pieles sensibles y reactivas.</p>
+          </div>
+        </article>
+
+        <!-- Producto 6 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 6.jpg" 
+                 alt="Crema iluminadora con vitamina C" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Iluminadora Vitamina C</h3>
+            <p class="product-description">Revitaliza y aporta luminosidad a la piel con un potente complejo de vitamina C y antioxidantes.</p>
+          </div>
+        </article>
+
+        <!-- Producto 7 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 7.jpg" 
+                 alt="Crema facial hidratante de día" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema de Día Protectora</h3>
+            <p class="product-description">Protección diaria con SPF 30 e hidratación balanceada para todo tipo de piel.</p>
+          </div>
+        </article>
+
+        <!-- Producto 8 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 8.jpg" 
+                 alt="Crema facial revitalizante" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Revitalizante</h3>
+            <p class="product-description">Energiza y refresca la piel con extractos botánicos y minerales esenciales.</p>
+          </div>
+        </article>
+
+        <!-- Producto 9 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 9.jpg" 
+                 alt="Crema facial nutritiva intensiva" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Ultra Nutritiva</h3>
+            <p class="product-description">Nutrición profunda con aceites naturales para pieles muy secas y deshidratadas.</p>
+          </div>
+        </article>
+
+        <!-- Producto 10 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 10.webp" 
+                 alt="Crema facial equilibrante" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Equilibrante</h3>
+            <p class="product-description">Equilibra la producción de grasa manteniendo la hidratación óptima en pieles mixtas.</p>
+          </div>
+        </article>
+
+        <!-- Producto 11 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 11.jpg" 
+                 alt="Crema facial reafirmante" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Reafirmante</h3>
+            <p class="product-description">Mejora la firmeza y elasticidad de la piel con péptidos y colágeno marino.</p>
+          </div>
+        </article>
+
+        <!-- Producto 12 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 12.webp" 
+                 alt="Crema facial reparadora" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Reparadora Nocturna</h3>
+            <p class="product-description">Repara y regenera intensamente la piel durante el descanso nocturno.</p>
+          </div>
+        </article>
+
+        <!-- Producto 13 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 13.jpg" 
+                 alt="Crema facial suavizante" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Suavizante</h3>
+            <p class="product-description">Suaviza la textura de la piel y minimiza la apariencia de poros dilatados.</p>
+          </div>
+        </article>
+
+        <!-- Producto 14 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 14.webp" 
+                 alt="Crema facial antioxidante" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Antioxidante</h3>
+            <p class="product-description">Protege contra el daño ambiental con potentes antioxidantes naturales.</p>
+          </div>
+        </article>
+
+        <!-- Producto 15 -->
+        <article class="product-card">
+          <div class="product-image-container">
+            <img src="images/crema 15.jpg" 
+                 alt="Crema facial hidratante ligera" 
+                 class="product-image"
+                 loading="lazy">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Crema Hidratante Ligera</h3>
+            <p class="product-description">Hidratación sin peso, perfecta para pieles jóvenes y climas cálidos.</p>
+          </div>
+        </article>
+        
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-links" aria-label="Enlaces del pie de página">
+        <a href="index.html" class="footer-link">Inicio</a>
+        <a href="Cremas.html" class="footer-link">Cremas</a>
+        <a href="Serums.html" class="footer-link">Sérums</a>
+        <a href="Mascarillas.html" class="footer-link">Mascarillas</a>
+      </nav>
+      <p class="copyright">© 2026 G glow - Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+```
+
+---
+
+## 4️⃣ **products-styles.css** (CSS para páginas de productos)
+
+Crea este archivo en la misma carpeta:
+```css
+/* =====================================================
+   VARIABLES (Misma paleta que index)
+===================================================== */
+:root {
+  --color-primario: #8a5a7f;
+  --color-secundario: #b87ea3;
+  --color-acento: #d4a5c4;
+  --color-fondo: #f7f4f6;
+  --color-texto: #2d2d2d;
+  --color-texto-suave: #555555;
+  --blanco: #ffffff;
+  --gris-claro: #e8e8e8;
+  --sombra-suave: 0 4px 12px rgba(0,0,0,0.08);
+  --sombra-media: 0 8px 20px rgba(0,0,0,0.12);
+  --sombra-fuerte: 0 15px 40px rgba(0,0,0,0.15);
+  --transition-base: all 0.3s ease;
+}
+
+/* =====================================================
+   RESET
+===================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #ffffff, #e4b5e5);
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+/* Clase de utilidad */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =====================================================
+   SKIP LINK
+===================================================== */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primario);
+  color: var(--blanco);
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 10000;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--color-acento);
+}
+
+/* =====================================================
+   HEADER Y NAVEGACIÓN
+===================================================== */
+.site-header {
+  background-color: var(--blanco);
+  box-shadow: var(--sombra-suave);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.logo-link {
+  display: inline-block;
+}
+
+.logo-link:focus {
+  outline: 3px solid var(--color-primario);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-texto-suave);
+  font-weight: 500;
+  padding: 8px 12px;
+  transition: var(--transition-base);
+  border-radius: 4px;
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 12px;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-secundario);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--color-primario);
+  outline: none;
+}
+
+.nav-link:focus {
+  box-shadow: 0 0 0 3px var(--color-acento);
+}
+
+.nav-link:hover::after {
+  width: calc(100% - 24px);
+}
+
+.nav-link[aria-current="page"] {
+  color: var(--color-primario);
+  font-weight: 600;
+}
+
+/* =====================================================
+   BREADCRUMBS
+===================================================== */
+.breadcrumbs {
+  padding: 20px 60px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumbs nav {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.breadcrumbs ol {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.breadcrumbs a {
+  color: var(--color-texto-suave);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.breadcrumbs a:hover,
+.breadcrumbs a:focus {
+  color: var(--color-primario);
+  text-decoration: underline;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  content: "›";
+  color: var(--color-texto-suave);
+}
+
+/* =====================================================
+   PÁGINA PRINCIPAL
+===================================================== */
+.page-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+
+.page-title {
+  color: var(--color-primario);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.page-description {
+  color: var(--color-texto-suave);
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* =====================================================
+   GRID DE PRODUCTOS
+===================================================== */
+.products-section {
+  padding: 40px 20px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 35px;
+  margin-top: 40px;
+}
+
+.product-card {
+  background: var(--blanco);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--sombra-suave);
+  transition: var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card:hover,
+.product-card:focus-within {
+  transform: translateY(-8px);
+  box-shadow: var(--sombra-media);
+}
+
+.product-image-container {
+  position: relative;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 15px;
+  aspect-ratio: 1;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.08);
+}
+
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.product-title {
+  font-size: 1.2rem;
+  color: var(--color-primario);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.product-description {
+  color: var(--color-texto-suave);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* =====================================================
+   FOOTER (Simplificado)
+===================================================== */
+.site-footer {
+  background: linear-gradient(135deg, #8a5a7f, #b87ea3);
+  color: #ffffff;
+  padding: 50px 20px 20px;
+  margin-top: 60px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.footer-link {
+  color: var(--blanco);
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.footer-link:hover,
+.footer-link:focus {
+  color: #f2d6e9;
+  text-decoration: underline;
+}
+
+.copyright {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+@media (max-width: 768px) {
+  .site-nav {
+    padding: 15px 20px;
+    flex-direction: column;
+  }
+  
+  .nav-menu {
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .breadcrumbs {
+    padding: 15px 20px;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+  }
+}
+
+/* =====================================================
+   MODO ALTO CONTRASTE
+===================================================== */
+@media (prefers-contrast: high) {
+  :root {
+    --color-primario: #6b4060;
+    --color-texto: #000000;
+  }
+  
+  .product-card {
+    border: 2px solid var(--color-texto);
+  }
+}
+
+/* =====================================================
+   REDUCIR MOVIMIENTO
+===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.

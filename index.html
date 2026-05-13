@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G glow | Skincare Natural - Cuidado Real para tu Piel</title>
+  <meta name="description" content="G glow - Cuidado de la piel con productos de skincare de alta calidad. Cremas, sérums, mascarillas y más para hidratar y proteger tu piel.">
+  <link rel="icon" type="image/png" href="images/logo originall.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+ 
+  <style>
+    .auth-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+    .auth-modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 30px;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: #f0f0f0;
+      color: #666;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 10px 10px 0 0;
+      transition: all 0.3s;
+    }
+    .auth-tab.active {
+      background: #4a9d6a;
+      color: white;
+    }
+    .auth-form {
+      display: none;
+    }
+    .auth-form.active {
+      display: block;
+    }
+    .auth-form h2 {
+      text-align: center;
+      color: #2d5f3f;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #2d5f3f;
+      font-weight: bold;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    .auth-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .auth-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(45, 95, 63, 0.3);
+    }
+    .auth-modal.hidden {
+      display: none;
+    }
+  </style>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+
+</head>
+<body>
+  
+  <!-- Modal de Login/Registro -->
+  <div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+      <div class="auth-tabs">
+        <button id="loginTab" class="auth-tab active">Iniciar Sesión</button>
+        <button id="registerTab" class="auth-tab">Registrarse</button>
+      </div>
+      
+      <div id="loginForm" class="auth-form active">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginFormEl">
+          <div class="form-group">
+            <label for="loginEmail">Correo Electrónico</label>
+            <input type="email" id="loginEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Contraseña</label>
+            <input type="password" id="loginPassword" required>
+          </div>
+          <button type="submit" class="auth-btn">Iniciar Sesión</button>
+        </form>
+      </div>
+      
+      <div id="registerForm" class="auth-form">
+        <h2>Registrarse</h2>
+        <form id="registerFormEl">
+          <div class="form-group">
+            <label for="registerName">Nombre Completo</label>
+            <input type="text" id="registerName" required>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Correo Electrónico</label>
+            <input type="email" id="registerEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Contraseña</label>
+            <input type="password" id="registerPassword" required>
+          </div>
+          <div class="form-group">
+            <label for="registerConfirmPassword">Confirmar Contraseña</label>
+            <input type="password" id="registerConfirmPassword" required>
+          </div>
+          <button type="submit" class="auth-btn">Registrarse</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- Header  -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="index.html" class="logo-link" aria-label="G glow - Página de inicio">
+        <img src="images/logo originall.png" alt="Logo de G glow" class="logo">
+      </a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html" aria-current="page" class="nav-link">Inicio</a></li>
+        <li><a href="Cremas.html" class="nav-link" >Cremas</a></li>
+        <li><a href="Limpiadores.html" class="nav-link">Limpiadores</a></li>
+        <li><a href="Protectores solares.html" class="nav-link">Protectores solares</a></li>
+        <li><a href="Serums.html" class="nav-link">Sérums</a></li>
+        <li><a href="Contorno de ojos.html" class="nav-link">Contorno de ojos</a></li>
+        <li><a href="Exfoliantes.html" class="nav-link">Exfoliantes</a></li>
+        <li><a href="Mascarillas.html" class="nav-link">Mascarillas</a></li>
+        <li><a href="index.html#localizarPedido" class="nav-link"><i class="fas fa-tracking"></i> Localizar Pedido</a></li>
+        <li id="logoutBtn" style="display: none;"><button onclick="logout()" class="nav-link" style="background: none; border: none; cursor: pointer;">Cerrar Sesión</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" aria-labelledby="hero-title">
+    <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="video/mixkit-a-young-woman-applies-skincare-moisturizing-cream-on-her-face-50426-hd-ready.mp4" type="video/mp4">
+    </video>
+    
+    <div class="hero-overlay" aria-hidden="true"></div>
+    
+    <div class="hero-content">
+      <h1 id="hero-title" class="hero-title">Cuidado real para tu piel</h1>
+      <p class="hero-description">Descubre el poder de los ingredientes naturales. Skincare pensado para hidratar, proteger y resaltar tu belleza natural cada día.</p>
+      <a href="Cremas.html" class="btn btn-primary">Explorar productos</a>
+    </div>
+  </section>
+
+  <!-- Contenido Principal -->
+  <main id="main-content">
+    
+    <!-- Showcase de Productos -->
+    <section class="product-showcase section" aria-labelledby="showcase-title">
+      <h2 id="showcase-title" class="visually-hidden">Galería de productos</h2>
+      <img src="images/Imagen principal profesional.png" 
+           alt="Colección completa de productos G glow" 
+           class="product-image">
+    </section>
+
+    <!-- Carrusel de Destacados sencillo -->
+    <section class="destacados-section section" aria-labelledby="destacados-title">
+      <h2 id="destacados-title">Destacados</h2>
+      <div class="carrusel">
+        <div class="carrusel-container" id="carrusel">
+          <img src="images/imagen carrusel 2 .png" alt="CeraVe Moisturising Lotion">
+          <img src="images/imagen carrusel 1.png" alt="La Roche-Posay Effaclar Ultra Concentrated Serum">
+          <img src="images/imagen carrusel 3.png" alt="L'Oreal Revitalif Tónico Rellenador">
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Informativo -->
+    <section class="video-section section" aria-labelledby="video-title">
+      <h2 id="video-title" class="section-title">Descubre más sobre el skincare</h2>
+      <p class="section-subtitle">Aprende cómo cuidar tu piel de manera efectiva</p>
+      
+      <div class="video-container">
+        <video class="video-player" controls preload="metadata">
+          <source src="video/mixkit-a-young-woman-applies-skincare-moisturizing-cream-on-her-face-50426-hd-ready.mp4" type="video/mp4">
+          
+        </video>
+      </div>
+    </section>
+
+    <!-- Carrusel de Productos en Oferta -->
+    <section class="carousel-section section" aria-labelledby="carousel-title">
+      <div class="section-header">
+        <h2 id="carousel-title" class="section-title"> Productos en Oferta</h2>
+        <p class="section-subtitle">Descubre increíbles descuentos en nuestros productos favoritos</p>
+      </div>
+      
+      <div class="carousel-wrapper">
+        <button class="nav-btn prev" id="prevBtn" aria-label="Anterior">&#8592;</button>
+        <div class="carousel-outer">
+          <div class="carousel-track" id="track">
+
+            <div class="kit-card product-card-item" data-product-id="1" data-product-name="CeraVe Moisturising Lotion" data-product-brand="CeraVe" data-product-price="$38" data-product-desc="Loción hidratante ligera formulada con ceramidas y ácido hialurónico. Restaura y mantiene la barrera cutánea natural de tu piel para una hidratación duradera." data-product-tags="Piel Seca,Hidratación">
+              <span class="kit-badge green">Oferta</span>
+              <div class="kit-image"><img src="images/crema 3.avif" alt="CeraVe Moisturising Lotion"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="2" data-product-name="La Roche-Posay Effaclar Ultra Concentrated Serum" data-product-brand="La Roche-Posay" data-product-price="$29" data-product-desc="Sérum ultra concentrado especialmente formulado para pieles con acné. Purifica, reduce brillos y controla el sebo para una piel más clara y saludable." data-product-tags="Acné,Purificante">
+              <span class="kit-badge salmon">Oferta</span>
+              <div class="kit-image"><img src="images/serum4.avif" alt="La Roche-Posay Effaclar Ultra Concentrated Serum"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="3" data-product-name="L'Oreal Revitalif Tónico Rellenador" data-product-brand="L'Oreal" data-product-price="$95" data-product-desc="Tónico rellenador con ácido hialurónico que rellena la piel desde adentro. Minimiza arrugas y proporciona un efecto tensor inmediato para una piel más joven." data-product-tags="Antiarrugas,Relleno">
+              <span class="kit-badge outline">Oferta</span>
+              <div class="kit-image"><img src="images/toni1.avif" alt="L'Oreal Revitalif Tónico Rellenador"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="4" data-product-name="La Roche-Posay Effaclar Gel Moussant Purificant" data-product-brand="La Roche-Posay" data-product-price="$78" data-product-desc="Gel limpiador espumante purificante que elimina impurezas sin resecar. Ideal para pieles grasas y con tendencia al acné, deja la piel limpia y fresca." data-product-tags="Limpieza,Purificante">
+              <span class="kit-badge salmon">Oferta</span>
+              <div class="kit-image"><img src="images/limpiador 2.avif" alt="La Roche-Posay Effaclar Gel Moussant Purificant"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="5" data-product-name="Eucerin Clear Skin for Acne Prone Sunscreen Lotion for Face" data-product-brand="Eucerin" data-product-price="$62" data-product-desc="Protector solar especializado para pieles propensas al acné. Protege contra rayos UV sin obstruir poros ni agravar el acné, con acabado mate." data-product-tags="Protección,Acné">
+              <span class="kit-badge salmon">Oferta</span>
+              <div class="kit-image"><img src="images/pr3.avif" alt="Eucerin Clear Skin for Acne Prone Sunscreen Lotion for Face"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="6" data-product-name="L'Oreal Revitalif Filler más Ácido Hialurónico" data-product-brand="L'Oreal" data-product-price="$180" data-product-desc="Crema relleno intensivo con ácido hialurónico y péptidos. Rellena arrugas profundas, reafirma la piel y restaura el volumen perdido con resultados visibles." data-product-tags="Relleno,Volumizador">
+              <span class="kit-badge green">Oferta</span>
+              <div class="kit-image"><img src="images/serum8.avif" alt="L'Oreal Revitalif Filler más Ácido Hialurónico"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="7" data-product-name="Hyalogyc Facial Toner with Hialuronic Acid with Hazel and Aloe Vera" data-product-brand="Hyalogyc" data-product-price="$54" data-product-desc="Tónico facial refrescante con ácido hialurónico, hamamelis y aloe vera. Equilibra el pH, hidrata y calma la piel con ingredientes naturales suavizantes." data-product-tags="Hidratación,Natural">
+              <span class="kit-badge salmon">Oferta</span>
+              <div class="kit-image"><img src="images/toni3.avif" alt="Hyalogyc Facial Toner with Hialuronic Acid with Hazel and Aloe Vera"></div>
+            </div>
+
+            <div class="kit-card product-card-item" data-product-id="8" data-product-name="Cetaphil Daily Facial Cleanser" data-product-brand="Cetaphil" data-product-price="$45" data-product-desc="Limpiador facial suave diario recomendado por dermatólogos. Elimina impurezas sin resecar ni irritar, ideal para todo tipo de piel incluso sensible." data-product-tags="Suave,Diario">
+              <span class="kit-badge outline">Oferta</span>
+              <div class="kit-image"><img src="images/limpiador 5.avif" alt="Cetaphil Daily Facial Cleanser"></div>
+            </div>
+
+          </div>
+        </div>
+        <button class="nav-btn next" id="nextBtn" aria-label="Siguiente">&#8594;</button>
+      </div>
+
+      <div class="carousel-dots" id="dots"></div>
+    </section>
+
+    <!-- Modal de Detalles del Producto -->
+    <div id="productModal" class="product-modal">
+      <div class="modal-content">
+        <button class="modal-close" id="closeModal">&times;</button>
+        <div class="modal-body">
+          <div class="modal-image">
+            <img id="modalImage" src="" alt="Producto">
+          </div>
+          <div class="modal-details">
+            <span id="modalBrand" class="modal-brand"></span>
+            <h2 id="modalName" class="modal-title"></h2>
+            <p id="modalDesc" class="modal-description"></p>
+            <div id="modalTags" class="modal-tags"></div>
+            <div class="modal-footer">
+              <span id="modalPrice" class="modal-price"></span>
+              <button class="modal-btn" onclick="addToCart(document.getElementById('modalName').textContent, extractPrice(document.getElementById('modalPrice').textContent))">Agregar al Carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Combos Especiales -->
+    <section class="featured-combos section" aria-labelledby="combos-title">
+      <h2 id="combos-title" class="section-title">Combos Especiales</h2>
+      <p class="section-subtitle">Rutinas completas diseñadas para resultados visibles</p>
+      
+      <div class="combo-grid">
+        <article class="combo-card">
+          <img src="images/combo 2 ....webp" 
+               alt="Set de limpieza profunda" 
+               class="combo-image">
+          <h3 class="combo-title">Combo limpieza profunda</h3>
+        </article>
+        
+        <article class="combo-card">
+          <img src="images/combo 3 ....jpg" 
+               alt="Set hidratante completo" 
+               class="combo-image">
+          <h3 class="combo-title">Combo hidratante</h3>
+        </article>
+      </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="benefits-section section" aria-labelledby="benefits-title">
+      <h2 id="benefits-title" class="section-title">¿Por qué elegir G glow?</h2>
+      <p class="section-subtitle">Siempre comprometidos con tu piel</p>
+      
+      <div class="benefits-grid">
+        <article class="benefit-card">
+          <span class="benefit-icon" aria-hidden="true"><i class="fas fa-leaf"></i></span>
+          <h3 class="benefit-title">Productos de calidad</h3>
+          <p class="benefit-description">Ingredientes cuidadosamente seleccionados, suaves y efectivos para todo tipo de piel.</p>
+        </article>
+        
+        <article class="benefit-card">
+          <span class="benefit-icon" aria-hidden="true"><i class="fas fa-droplet"></i></span>
+          <h3 class="benefit-title">Cuidado especializado</h3>
+          <p class="benefit-description">Cada producto está formulado científicamente para hidratar, proteger y revitalizar tu piel.</p>
+        </article>
+        
+        <article class="benefit-card">
+          <span class="benefit-icon" aria-hidden="true"><i class="fas fa-star"></i></span>
+          <h3 class="benefit-title">Resultados reales</h3>
+          <p class="benefit-description">Miles de clientes satisfechos con resultados visibles desde la primera semana.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonials-section section" aria-labelledby="testimonials-title">
+      <h2 id="testimonials-title" class="section-title">Lo que dicen nuestros clientes</h2>
+      <p class="section-subtitle">Historias reales de transformación</p>
+      
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <blockquote>
+            <p class="testimonial-text">Los productos de las marcas que vende G glow han transformado completamente mi piel. Después de solo 3 semanas, mi piel se ve más radiante y saludable.</p>
+            <footer>
+              <cite class="testimonial-author">María González</cite>
+              <div class="testimonial-rating" aria-label="Calificación: 5 de 5 estrellas">★★★★★</div>
+            </footer>
+          </blockquote>
+        </article>
+        
+        <article class="testimonial-card">
+          <blockquote>
+            <p class="testimonial-text">Tengo piel sensible y finalmente encontré productos buenos que no me irritan. ¡Es increíble!</p>
+            <footer>
+              <cite class="testimonial-author">Ana Rodríguez</cite>
+              <div class="testimonial-rating" aria-label="Calificación: 5 de 5 estrellas">★★★★★</div>
+            </footer>
+          </blockquote>
+        </article>
+        
+        <article class="testimonial-card">
+          <blockquote>
+            <p class="testimonial-text">El combo de limpieza profunda es lo mejor que he probado. Mi piel nunca se había sentido tan limpia y fresca. 100% recomendado.</p>
+            <footer>
+              <cite class="testimonial-author">Carmen Pérez</cite>
+              <div class="testimonial-rating" aria-label="Calificación: 5 de 5 estrellas">★★★★★</div>
+            </footer>
+          </blockquote>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section section" aria-labelledby="cta-title">
+      <h2 id="cta-title" class="section-title">¿Lista para transformar tu piel?</h2>
+      <p class="cta-description">Únete a miles de mujeres que ya descubrieron el secreto de una piel radiante</p>
+      <a href="Cremas.html" class="btn btn-secondary">Ver todos los productos</a>
+    </section>
+
+    <!-- Localizar pedido -->
+    <section id="localizarPedido" class="order-tracking-section section" aria-labelledby="localizarPedido-title">
+      <h2 id="localizarPedido-title" class="section-title">Localizar Pedido</h2>
+      <p class="section-subtitle">Sigue el estado de tu compra y verifica dónde está tu pedido.</p>
+      <div id="orderTrackingInfo" class="tracking-container">
+        <div class="empty-order-state">
+          <i class="fas fa-box" style="font-size: 3rem; color: #4a9d6a; margin-bottom: 1rem;"></i>
+          <p>No se ha realizado ningún pedido aún.</p>
+          <p style="font-size: 0.9rem; color: #999;">Finaliza tu compra para ver el seguimiento aquí.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulario de Ayuda -->
+    <section id="ayuda" class="help-form-section section" aria-labelledby="help-form-title">
+      <h2 id="help-form-title" class="section-title">¿Necesitas Ayuda?</h2>
+      <p class="section-subtitle">Contáctanos si tienes dudas o requieres asistencia. Te responderemos lo antes posible</p>
+      
+      <div class="help-form-container">
+        <form id="helpForm" class="help-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="helpName">Nombre Completo</label>
+              <input type="text" id="helpName" name="name" required placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+              <label for="helpEmail">Correo Electrónico</label>
+              <input type="email" id="helpEmail" name="email" required placeholder="tu@email.com">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="helpType">Tipo de Consulta</label>
+              <select id="helpType" name="type" required>
+                <option value="">-- Selecciona un tipo --</option>
+                <option value="producto">Consulta sobre un producto</option>
+                <option value="pedido">Problema con mi pedido</option>
+                <option value="envio">Información de envío</option>
+                <option value="devolucion">Devoluciones y cambios</option>
+                <option value="pago">Problema con el pago</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="helpSubject">Asunto</label>
+              <input type="text" id="helpSubject" name="subject" required placeholder="Describe brevemente tu consulta">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label for="helpMessage">Mensaje</label>
+              <textarea id="helpMessage" name="message" rows="5" required placeholder="Cuéntanos con detalle cuál es tu duda o problema..."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary help-submit-btn">Enviar Consulta</button>
+        </form>
+
+        <div class="help-info">
+          <h3>Información de Contacto Directo</h3>
+          <div class="help-contact-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <p class="help-contact-title">Teléfono</p>
+              <a href="tel:+18294849081">+1 (829) 484-9081</a>
+            </div>
+          </div>
+          
+          <div class="help-contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <p class="help-contact-title">Email</p>
+              <a href="mailto:gglow12@gmail.com">gglow12@gmail.com</a>
+            </div>
+          </div>
+          
+          <div class="help-contact-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <p class="help-contact-title">Horario de Atención</p>
+              <p>Lunes a Sábado: 8:00 AM - 5:00 PM</p>
+            </div>
+          </div>
+
+          <div class="help-contact-item">
+            <i class="fab fa-whatsapp"></i>
+            <div>
+              <p class="help-contact-title">WhatsApp</p>
+              <a href="https://wa.me/18294849081">Chatea con nosotros</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="helpNotification" class="help-notification" style="display: none;">
+        <i class="fas fa-check-circle"></i>
+        <p>¡Gracias por tu consulta! Nos pondremos en contacto pronto.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal del Carrito -->
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-modal-content">
+      <div class="cart-modal-header">
+        <h2>Mi Carrito</h2>
+        <button class="cart-modal-close" id="closeCartModal">&times;</button>
+      </div>
+      <div class="cart-modal-body" id="cartModalBody">
+        <div class="empty-cart-message">
+          <i class="fas fa-shopping-cart"></i>
+          <p>Tu carrito está vacío</p>
+        </div>
+      </div>
+      <div class="cart-modal-footer" id="cartModalFooter" style="display: none;">
+        <div class="cart-total">
+          <strong>Total: <span id="cartTotal">$0</span></strong>
+        </div>
+        <button class="btn btn-primary" style="width: 100%;">Proceder al pago</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-grid">
+        
+        <div class="footer-column">
+          <h3>G glow</h3>
+          <p>Cuidado real para tu piel. Productos naturales de alta calidad que transforman tu rutina de skincare.</p>
+        </div>
+        
+        <nav class="footer-column" aria-labelledby="footer-nav-title">
+          <h3 id="footer-nav-title">Navegación</h3>
+          <ul class="footer-nav">
+            <li><a href="index.html" class="footer-link">Inicio</a></li>
+            <li><a href="Cremas.html" class="footer-link">Cremas</a></li>
+            <li><a href="Serums.html" class="footer-link">Sérums</a></li>
+            <li><a href="Limpiadores.html" class="footer-link">Limpiadores</a></li>
+            <li><a href="Mascarillas.html" class="footer-link">Mascarillas</a></li>
+          </ul>
+        </nav>
+        
+        <div class="footer-column">
+          <h3>Contacto</h3>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> República Dominicana</li>
+            <li><a href="tel:+18294849081" class="footer-link"><i class="fas fa-phone"></i> +1 (829) 484-9081</a></li>
+            <li><a href="mailto:gglow12@gmail.com" class="footer-link"><i class="fas fa-envelope"></i> gglow12@gmail.com</a></li>
+            <li><i class="fas fa-clock"></i> Lun - Sáb: 8am - 5pm</li>
+          </ul>
+        </div>
+        
+        <nav class="footer-column" aria-labelledby="social-title">
+          <h3 id="social-title">Síguenos</h3>
+          <div class="social-links">
+            <a href="https://www.instagram.com/by_gglow/" class="social-link">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.google.com/maps/d/u/0/edit?mid=14gLYzNstQtOiB1lMIh8Y6rZ52dz71w0&ll=19.4518218672592%2C-70.654649214992&z=19" class="social-link">
+              <i class="fab fa-Ubicación"></i> Ubicación
+            </a>
+            <a href="https://wa.me/18294849081" class="social-link">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </nav>
+        
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 G glow - Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón Scroll to Top -->
+  <a href="#" class="scroll-to-top" aria-label="Volver arriba">↑</a>
+
+  <script>
+    // ─────────────────── FUNCIONALIDAD DEL MODAL DE PRODUCTOS ─────────────────── 
+    const productModal = document.getElementById('productModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const productCards = document.querySelectorAll('.product-card-item');
+
+    function extractPrice(priceString) {
+      const match = priceString.match(/\d+/);
+      return match ? parseInt(match[0]) : 0;
+    }
+
+    // Abrir modal
+    productCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const productId = this.dataset.productId;
+        const productName = this.dataset.productName;
+        const productBrand = this.dataset.productBrand;
+        const productPrice = this.dataset.productPrice;
+        const productDesc = this.dataset.productDesc;
+        const productTags = this.dataset.productTags.split(',');
+        const imgSrc = this.querySelector('img').src;
+
+        // Actualizar modal con datos
+        document.getElementById('modalImage').src = imgSrc;
+        document.getElementById('modalImage').alt = productName;
+        document.getElementById('modalBrand').textContent = productBrand;
+        document.getElementById('modalName').textContent = productName;
+        document.getElementById('modalPrice').textContent = productPrice;
+        document.getElementById('modalDesc').textContent = productDesc;
+
+        // Generar tags
+        const tagsContainer = document.getElementById('modalTags');
+        tagsContainer.innerHTML = '';
+        productTags.forEach(tag => {
+          const tagEl = document.createElement('span');
+          tagEl.className = 'modal-tag';
+          tagEl.textContent = tag.trim();
+          tagsContainer.appendChild(tagEl);
+        });
+
+        // Mostrar modal
+        productModal.classList.add('active');
+      });
+    });
+
+    // Cerrar modal
+    closeModalBtn.addEventListener('click', () => {
+      productModal.classList.remove('active');
+    });
+
+    // Cerrar modal al hacer clic fuera
+    productModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        productModal.classList.remove('active');
+      }
+    });
+
+    // Cerrar modal con tecla Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        productModal.classList.remove('active');
+      }
+    });
+
+    // Scroll to top functionality
+    const scrollBtn = document.querySelector('.scroll-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollBtn.classList.add('visible');
+      } else {
+        scrollBtn.classList.remove('visible');
+      }
+    });
+
+    scrollBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // ─────────────────── CARRUSEL JAVASCRIPT ─────────────────── 
+    const track   = document.getElementById('track');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsEl  = document.getElementById('dots');
+    const cards   = Array.from(track.children);
+    let current   = 0;
+
+    function visibleCount() {
+      const w = window.innerWidth;
+      if (w <= 540) return 1;
+      if (w <= 860) return 2;
+      return 3;
+    }
+
+    function maxIndex() { return cards.length - visibleCount(); }
+
+    function buildDots() {
+      dotsEl.innerHTML = '';
+      for (let i = 0; i <= maxIndex(); i++) {
+        const d = document.createElement('button');
+        d.className = 'dot' + (i === current ? ' active' : '');
+        d.setAttribute('aria-label', `Producto ${i + 1}`);
+        d.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(d);
+      }
+    }
+
+    function updateDots() {
+      Array.from(dotsEl.children).forEach((d, i) =>
+        d.classList.toggle('active', i === current));
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(index, maxIndex()));
+      const cardW = cards[0].getBoundingClientRect().width;
+      track.style.transform = `translateX(-${current * (cardW + 22)}px)`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === maxIndex();
+      updateDots();
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    let tx = 0;
+    track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   e => {
+      const diff = tx - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+    });
+
+    window.addEventListener('resize', () => { buildDots(); goTo(Math.min(current, maxIndex())); });
+    buildDots();
+    goTo(0);
+
+    // Variable global para carrito
+    let cart = [];
+
+    // Cargar carrito desde localStorage
+    function loadCart() {
+      const saved = localStorage.getItem('cartItems');
+      cart = saved ? JSON.parse(saved) : [];
+      updateCartUI();
+    }
+
+    // Guardar carrito en localStorage
+    function saveCart() {
+      localStorage.setItem('cartItems', JSON.stringify(cart));
+    }
+
+    // Agregar producto al carrito
+    function addToCart(name, price) {
+      const item = {
+        name: name,
+        price: price,
+        id: Date.now(),
+        quantity: 1
+      };
+      cart.push(item);
+      saveCart();
+      updateCartUI();
+      productModal.classList.remove('active');
+      showNotification(`"${name}" agregado al carrito`);
+    }
+
+    // Actualizar UI del carrito
+    function updateCartUI() {
+      const cartBtn = document.getElementById('cartCount');
+      cartBtn.textContent = cart.length;
+
+      const cartBody = document.getElementById('cartModalBody');
+      const cartFooter = document.getElementById('cartModalFooter');
+
+      if (cart.length === 0) {
+        cartBody.innerHTML = `
+          <div class="empty-cart-message">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Tu carrito está vacío</p>
+          </div>
+        `;
+        cartFooter.style.display = 'none';
+      } else {
+        let html = '<div class="cart-items-list">';
+        let total = 0;
+
+        cart.forEach((item, index) => {
+          total += item.price;
+          html += `
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p class="cart-item-price">$${item.price}</p>
+              </div>
+              <button class="cart-item-remove" onclick="removeFromCart(${index})" aria-label="Eliminar ${item.name}">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          `;
+        });
+
+        html += '</div>';
+        cartBody.innerHTML = html;
+
+        document.getElementById('cartTotal').textContent = '$' + total;
+        cartFooter.style.display = 'block';
+      }
+    }
+
+    // Eliminar producto del carrito
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      saveCart();
+      updateCartUI();
+    }
+
+    // Mostrar notificación
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.textContent = message;
+      notification.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #4a9d6a;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+      `;
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+
+    // Event listeners del carrito
+    const cartBtn = document.getElementById('cartBtn');
+    const cartModal = document.getElementById('cartModal');
+    const closeCartModal = document.getElementById('closeCartModal');
+
+    cartBtn.addEventListener('click', () => {
+      cartModal.classList.add('active');
+    });
+
+    closeCartModal.addEventListener('click', () => {
+      cartModal.classList.remove('active');
+    });
+
+    cartModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        cartModal.classList.remove('active');
+      }
+    });
+
+    // Cerrar carrito con Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && cartModal.classList.contains('active')) {
+        cartModal.classList.remove('active');
+      }
+    });
+
+    // Cargar carrito al iniciar
+    loadCart();
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // ─────────────────── AUTENTICACIÓN ───────────────────
+      const authModal = document.getElementById('authModal');
+      const loginTab = document.getElementById('loginTab');
+      const registerTab = document.getElementById('registerTab');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const loginFormEl = document.getElementById('loginFormEl');
+      const registerFormEl = document.getElementById('registerFormEl');
+
+      // Verificar sesión al cargar
+      function checkSession() {
+        const currentUser = localStorage.getItem('currentUser');
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (currentUser) {
+          authModal.classList.add('hidden');
+          logoutBtn.style.display = 'block';
+        } else {
+          authModal.classList.remove('hidden');
+          logoutBtn.style.display = 'none';
+        }
+      }
+
+      // Cambiar pestañas
+      loginTab.addEventListener('click', () => {
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
+      });
+
+      registerTab.addEventListener('click', () => {
+        registerTab.classList.add('active');
+        loginTab.classList.remove('active');
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
+      });
+
+      // Manejar registro
+      registerFormEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('registerName').value.trim();
+        const email = document.getElementById('registerEmail').value.trim().toLowerCase();
+        const password = document.getElementById('registerPassword').value;
+        const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+        if (!name || !email || !password) {
+          alert('Por favor, completa todos los campos');
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          alert('Las contraseñas no coinciden');
+          return;
+        }
+
+        if (password.length < 6) {
+          alert('La contraseña debe tener al menos 6 caracteres');
+          return;
+        }
+
+        // Guardar usuario
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        if (users.find(u => u.email === email)) {
+          alert('El correo ya está registrado');
+          return;
+        }
+
+        users.push({ name, email, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('currentUser', JSON.stringify({ name, email }));
+
+        authModal.classList.add('hidden');
+        showNotification('Registro exitoso. Bienvenido!');
+      });
+
+      // Manejar login
+      loginFormEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const password = document.getElementById('loginPassword').value;
+
+        if (!email || !password) {
+          alert('Por favor, ingresa correo y contraseña');
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (user) {
+          localStorage.setItem('currentUser', JSON.stringify({ name: user.name, email: user.email }));
+          authModal.classList.add('hidden');
+          showNotification(`Bienvenido de vuelta, ${user.name}!`);
+        } else {
+          alert('Correo o contraseña incorrectos');
+        }
+      });
+
+      // Cerrar sesión
+      window.logout = function() {
+        localStorage.removeItem('currentUser');
+        checkSession();
+        showNotification('Sesión cerrada');
+      };
+
+      // Verificar sesión al cargar
+      checkSession();
+    });
+  </script>
+
+  <!-- Script para rastreo de pedidos -->
+  <script>
+    function renderOrderTrackingSection() {
+      const order = localStorage.getItem('currentOrder');
+      const container = document.getElementById('orderTrackingInfo');
+      if (!container) return;
+
+      if (order) {
+        const orderData = JSON.parse(order);
+        const itemsList = orderData.items.map(item => 
+          `<li class="order-item"><span class="item-name">${item.name}</span> <span class="item-qty">x${item.qty}</span> <span class="item-price">$${(item.price * item.qty).toFixed(2)}</span></li>`
+        ).join('');
+        
+        container.innerHTML = `
+          <div class="tracking-grid">
+            <div class="order-details-card">
+              <h3><i class="fas fa-info-circle"></i> Detalles del Pedido</h3>
+              <div class="order-detail-row">
+                <span class="detail-label">ID de Pedido:</span>
+                <span class="detail-value">#${orderData.id}</span>
+              </div>
+              <div class="order-detail-row">
+                <span class="detail-label">Estado:</span>
+                <span class="order-status ${orderData.status.toLowerCase()}">${orderData.status}</span>
+              </div>
+              <div class="order-detail-row">
+                <span class="detail-label">Ubicación:</span>
+                <span class="detail-value"><i class="fas fa-map-marker-alt"></i> ${orderData.location}</span>
+              </div>
+              <div class="order-detail-row">
+                <span class="detail-label">Fecha:</span>
+                <span class="detail-value">${new Date(orderData.date).toLocaleString('es-ES')}</span>
+              </div>
+              <hr class="detail-separator">
+              <div class="order-detail-row">
+                <span class="detail-label" style="font-weight: 700;">Total:</span>
+                <span class="detail-value" style="font-weight: 700; color: #4a9d6a; font-size: 1.2rem;">$${orderData.total.toFixed(2)}</span>
+              </div>
+            </div>
+            <div class="order-items-card">
+              <h3><i class="fas fa-shopping-bag"></i> Artículos</h3>
+              <ul class="items-list">${itemsList}</ul>
+            </div>
+          </div>
+          <div id="mapContainer" class="map-container">
+            <div id="orderMap" class="order-map"></div>
+            <div class="map-info">
+              <i class="fas fa-map-marker-alt"></i> Tu pedido se encuentra en: <strong>${orderData.location}</strong>
+            </div>
+          </div>
+          <button class="tracking-close-btn" onclick="closeOrderTracking()" style="margin-top: 1.5rem;">Cerrar Seguimiento</button>
+        `;
+        
+        setTimeout(() => initializeOrderMap(orderData.location), 100);
+      } else {
+        container.innerHTML = `
+          <div class="empty-order-state">
+            <i class="fas fa-box" style="font-size: 3rem; color: #4a9d6a; margin-bottom: 1rem;"></i>
+            <p>No se ha realizado ningún pedido aún.</p>
+            <p style="font-size: 0.9rem; color: #999;">Finaliza tu compra para ver el seguimiento aquí.</p>
+          </div>
+        `;
+      }
+    }
+    
+    function initializeOrderMap(location) {
+      const mapContainer = document.getElementById('orderMap');
+      if (!mapContainer) return;
+      
+      if (mapContainer._leafletMap) {
+        mapContainer._leafletMap.remove();
+        mapContainer._leafletMap = null;
+      }
+      
+      const coordinates = {
+        'Santiago, RD': [19.4518, -70.6543],
+        'Santo Domingo': [18.4861, -69.9312],
+        'La Romana': [18.4267, -68.9747],
+        'Punta Cana': [18.5904, -68.4077],
+        'Puerto Plata': [19.7975, -70.1619]
+      };
+      
+      const coords = coordinates[location] || [19.4518, -70.6543];
+      
+      const map = L.map('orderMap').setView(coords, 12);
+      mapContainer._leafletMap = map;
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+      }).addTo(map);
+      
+      L.marker(coords).addTo(map).bindPopup(`<strong>${location}</strong><br/>Tu pedido está aquí`);
+    }
+    
+    function closeOrderTracking() {
+      localStorage.removeItem('currentOrder');
+      renderOrderTrackingSection();
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      renderOrderTrackingSection();
+
+      const order = localStorage.getItem('currentOrder');
+      if (order) {
+        const orderData = JSON.parse(order);
+        const trackingDiv = document.createElement('div');
+        trackingDiv.id = 'orderTracking';
+        trackingDiv.innerHTML = `
+          <div class="tracking-content">
+            <h3>Estado de tu Pedido</h3>
+            <p><strong>Estado:</strong> ${orderData.status}</p>
+            <p><strong>Ubicación:</strong> ${orderData.location}</p>
+            <button onclick="this.parentElement.parentElement.remove(); localStorage.removeItem('currentOrder');">Cerrar</button>
+          </div>
+        `;
+        trackingDiv.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #fff;
+          border: 2px solid #4a9d6a;
+          border-radius: 10px;
+          padding: 20px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+          z-index: 1000;
+          max-width: 300px;
+        `;
+        trackingDiv.querySelector('.tracking-content').style.cssText = `
+          text-align: center;
+        `;
+        trackingDiv.querySelector('h3').style.cssText = `
+          color: #2d5f3f;
+          margin-bottom: 10px;
+        `;
+        trackingDiv.querySelector('button').style.cssText = `
+          background: #4a9d6a;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-top: 10px;
+        `;
+        document.body.appendChild(trackingDiv);
+      }
+    });
+  </script>
+
+  <script src="cart.js"></script>
+  <!-- Script adicional para el carrusel de destacados -->
+  <script src="script.js"></script>
+
+  <!-- Script para el formulario de ayuda -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const helpForm = document.getElementById('helpForm');
+      const helpNotification = document.getElementById('helpNotification');
+
+      helpForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Obtener datos del formulario
+        const name = document.getElementById('helpName').value.trim();
+        const email = document.getElementById('helpEmail').value.trim();
+        const type = document.getElementById('helpType').value;
+        const subject = document.getElementById('helpSubject').value.trim();
+        const message = document.getElementById('helpMessage').value.trim();
+
+        // Validación básica
+        if (!name || !email || !type || !subject || !message) {
+          alert('Por favor, completa todos los campos');
+          return;
+        }
+
+        // Crear objeto con los datos
+        const helpData = {
+          name: name,
+          email: email,
+          type: type,
+          subject: subject,
+          message: message,
+          date: new Date().toLocaleString('es-ES'),
+          id: Date.now()
+        };
+
+        // Guardar en localStorage
+        const helpRequests = JSON.parse(localStorage.getItem('helpRequests') || '[]');
+        helpRequests.push(helpData);
+        localStorage.setItem('helpRequests', JSON.stringify(helpRequests));
+
+        // Mostrar notificación de éxito
+        helpForm.style.display = 'none';
+        helpNotification.style.display = 'flex';
+
+        // Restaurar formulario después de 4 segundos
+        setTimeout(() => {
+          helpForm.reset();
+          helpForm.style.display = 'block';
+          helpNotification.style.display = 'none';
+        }, 4000);
+
+        // Aquí puedes agregar código para enviar el formulario a un servidor PHP
+        // si tienes una tabla en la base de datos para guardar consultas
+      });
+    });
+  </script>
+</body>
+</html>

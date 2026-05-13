@@ -1,0 +1,625 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protectores Solares - G glow</title>
+    <link rel="stylesheet" href="style.css">
+       <style>
+        /* ─────────────────── VARIABLES Y RESET ─────────────────── */
+        :root {
+            --primary-color: #4a9d6a;
+            --primary-dark: #2d5f3f;
+            --primary-light: #5fb687;
+            --secondary-color: #f8b195;
+            --bg-light: #faf9f7;
+            --bg-white: #ffffff;
+            --text-dark: #2d3748;
+            --text-medium: #4a5568;
+            --text-light: #718096;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg-white) 0%, #f5f1ef 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ─────────────────── TÍTULO PRINCIPAL ─────────────────── */
+        h1 {
+            text-align: center;
+            color: var(--primary-dark);
+            padding: 50px 20px 40px;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        /* ─────────────────── GRID DE PRODUCTOS ─────────────────── */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            padding: 30px 40px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ─────────────────── TARJETAS DE PRODUCTOS ─────────────── */
+        .product-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(74, 157, 106, 0.05);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(74, 157, 106, 0.15);
+        }
+
+        /* Contenedor de imagen */
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 340px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f1ef 0%, #faf9f7 100%);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+            filter: brightness(1.02);
+        }
+
+        /* Info del producto */
+        .product-info {
+            padding: 24px 20px 28px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            gap: 12px;
+        }
+
+        .product-name {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            flex-grow: 1;
+            margin-bottom: 4px;
+        }
+
+        .product-price {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin: 8px 0;
+        }
+
+        /* Botón de compra */
+        .add-to-cart {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            width: 100%;
+            transition: var(--transition-smooth);
+            margin-top: auto;
+            letter-spacing: 0.3px;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 95, 63, 0.25);
+        }
+
+        .add-to-cart:active {
+            transform: translateY(0);
+        }
+
+        /* ─────────────────── MODAL DEL CARRITO ─────────────────── */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .cart-modal.active {
+            display: flex;
+        }
+
+        .cart-content {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            animation: slideUpIn 0.3s ease;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-header h2 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: var(--transition-smooth);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .close-cart:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        .cart-items {
+            margin: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            margin: 12px 0;
+            background: var(--bg-light);
+            border-radius: 10px;
+            transition: var(--transition-smooth);
+            border: 1px solid var(--border-color);
+        }
+
+        .cart-item:hover {
+            background: linear-gradient(135deg, rgba(74, 157, 106, 0.03) 0%, rgba(248, 177, 149, 0.03) 100%);
+            border-color: var(--primary-light);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .remove-item {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .remove-item:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .cart-total {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-color);
+            text-align: right;
+        }
+
+        .cart-total h3 {
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 20px;
+            transition: var(--transition-smooth);
+            letter-spacing: 0.3px;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 95, 63, 0.25);
+        }
+
+        /* ─────────────────── CARRITO VACÍO ─────────────────── */
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+
+        .empty-cart-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        /* ─────────────────── ANIMACIONES ─────────────────── */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUpIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        /* ─────────────────── RESPONSIVIDAD ─────────────────── */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 24px;
+                padding: 30px 30px 50px;
+            }
+
+            h1 {
+                padding: 40px 20px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 24px 16px 40px;
+            }
+
+            h1 {
+                padding: 30px 16px 24px;
+                font-size: 1.8rem;
+            }
+
+            .product-image-wrapper {
+                height: 280px;
+            }
+
+            .product-info {
+                padding: 20px 16px 24px;
+            }
+
+            .product-name {
+                font-size: 1rem;
+            }
+
+            .product-price {
+                font-size: 1.3rem;
+            }
+
+            .add-to-cart {
+                padding: 11px 20px;
+                font-size: 0.9rem;
+            }
+
+            .cart-content {
+                padding: 24px;
+            }
+
+            .cart-header {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 20px 12px 30px;
+            }
+
+            h1 {
+                padding: 24px 16px 20px;
+                font-size: 1.5rem;
+            }
+
+            .product-card {
+                border-radius: 14px;
+            }
+
+            .product-image-wrapper {
+                height: 240px;
+            }
+
+            .product-info {
+                padding: 18px 14px 22px;
+                gap: 8px;
+            }
+
+            .product-name {
+                font-size: 0.95rem;
+            }
+
+            .product-description {
+                font-size: 0.85rem;
+            }
+
+            .product-price {
+                font-size: 1.2rem;
+            }
+
+            .add-to-cart {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+
+            .cart-content {
+                padding: 20px;
+                border-radius: 14px;
+            }
+
+            .cart-header h2 {
+                font-size: 1.2rem;
+            }
+
+            .close-cart {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="site-nav">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo originall.png" alt="Logo de G glow" class="logo" style="height: 50px;">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="Cremas.html" class="nav-link">Cremas</a></li>
+                <li><a href="Limpiadores.html" class="nav-link">Limpiadores</a></li>
+                <li><a href="Protectores solares.html" aria-current="page" class="nav-link active">Protectores solares</a></li>
+                <li><a href="Serums.html" class="nav-link">Sérums</a></li>
+                <li><a href="Contorno de ojos.html" class="nav-link">Contorno de ojos</a></li>
+                <li><a href="Exfoliantes.html" class="nav-link">Exfoliantes</a></li>
+                <li><a href="Mascarillas.html" class="nav-link">Mascarillas</a></li>
+                <li><a href="index.html#localizarPedido" class="nav-link"><i class="fas fa-tracking"></i> Localizar Pedido</a></li>
+        <li id="logoutBtn" style="display: none;"><button onclick="logout()" class="nav-link" style="background: none; border: none; cursor: pointer;">Cerrar Sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Protectores Solares</h1>
+
+    <!-- Grid Único de Productos -->
+    <div class="products-grid" id="products-grid">
+        
+        <!-- Producto 1 -->
+        <div class="product-card">
+            <div class="product-image-wrapper">
+                <img src="images/pr1.webp" alt="Anthelios" class="product-image">
+            </div>
+            <div class="product-info">
+                <div class="product-name">La Roche-Posay Anthelios</div>
+                <div class="product-description">Protección UV avanzada. Textura ultra fluida ideal para piel sensible.</div>
+                <div class="product-price">$1,250</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'anthelios', name:'La Roche-Posay Anthelios', price:1250})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="product-card">
+            <div class="product-image-wrapper">
+                <img src="images/pr2.jpeg" alt="Neutrogena" class="product-image">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Neutrogena Ultra Sheer</div>
+                <div class="product-description">Fórmula ligera de rápida absorción. Resistente al agua y al sudor.</div>
+                <div class="product-price">$890</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'neutrogena', name:'Neutrogena Ultra Sheer', price:890})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="product-card">
+            <div class="product-image-wrapper">
+                <img src="images/pr3.avif" alt="CeraVe" class="product-image">
+            </div>
+            <div class="product-info">
+                <div class="product-name">CeraVe Mineral Sunscreen</div>
+                <div class="product-description">Con óxido de zinc y ceramidas esenciales para restaurar la barrera cutánea.</div>
+                <div class="product-price">$1,100</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'cerave', name:'CeraVe Mineral Sunscreen', price:1100})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="product-card">
+            <div class="product-image-wrapper">
+                <img src="images/pr4.jpg" alt="EltaMD" class="product-image">
+            </div>
+            <div class="product-info">
+                <div class="product-name">EltaMD UV Clear</div>
+                <div class="product-description">Protección facial con niacinamida. Calma pieles con tendencia al acné.</div>
+                <div class="product-price">$1,580</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'eltamd', name:'EltaMD UV Clear', price:1580})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <!-- Producto 5 -->
+        <div class="product-card">
+            <div class="product-image-wrapper">
+                <img src="images/pr5.jpg" alt="Supergoop" class="product-image">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Supergoop! Unseen Sunscreen</div>
+                <div class="product-description">Totalmente invisible y sin peso. Acabado aterciopelado ideal bajo maquillaje.</div>
+                <div class="product-price">$1,350</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'supergoop', name:'Supergoop! Unseen', price:1350})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <!-- Producto 6 -->
+        <div class="product-card">
+            <div class="product-image-wrapper">
+                <img src="images/pr6.webp" alt="Isdin" class="product-image">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Isdin Eryfotona Actinica</div>
+                <div class="product-description">Repara el daño actínico acumulado gracias a sus enzimas reparadoras.</div>
+                <div class="product-price">$1,680</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'isdin', name:'Isdin Eryfotona', price:1680})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <!-- Producto 7 -->
+        <div class="product-card">
+            <div class="product-image-wrapper">
+                <img src="images/pr7.jpg" alt="Eucerin" class="product-image">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Eucerin Oil Control</div>
+                <div class="product-description">Toque seco matificante. Controla el brillo en pieles grasas hasta por 8 horas.</div>
+                <div class="product-price">$980</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'eucerin', name:'Eucerin Oil Control', price:980})">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <!-- Producto 8 -->
+        <div class="product-card">
+            <div class="product-image-wrapper">
+                <img src="images/pr8.webp" alt="Biore" class="product-image">
+            </div>
+            <div class="product-info">
+                <div class="product-name">Bioré UV Aqua Rich</div>
+                <div class="product-description">Textura de agua ultra refrescante. No deja residuos blancos y es muy ligero.</div>
+                <div class="product-price">$750</div>
+                <button class="add-to-cart" onclick="Cart.add({id:'biore', name:'Bioré UV Aqua Rich', price:750})">Añadir al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+</body>
+</html>

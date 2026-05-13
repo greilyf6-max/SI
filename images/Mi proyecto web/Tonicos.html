@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tónicos Faciales - G glow | Skincare Natural</title>
+    <meta name="description" content="Descubre nuestra colección de tónicos faciales que equilibran, refrescan y preparan tu piel.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #ffffff, #e5b5b5);
+            min-height: 100vh;
+        }
+
+        /* Navegación */
+        nav {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            padding: 15px 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .logo img {
+            height: 60px;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Botón del carrito */
+        .cart-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(45, 95, 63, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(45, 95, 63, 0.5);
+        }
+
+        .cart-count {
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Modal del carrito */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-modal.active {
+            display: flex;
+        }
+
+        .cart-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4a9d6a;
+        }
+
+        .cart-header h2 {
+            color: #2d5f3f;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: #ff6b6b;
+        }
+
+        .cart-items {
+            margin: 20px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .cart-item:hover {
+            background: #e9f5ee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #2d5f3f;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #4a9d6a;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .remove-item:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #4a9d6a;
+            text-align: right;
+        }
+
+        .cart-total h3 {
+            color: #2d5f3f;
+            font-size: 24px;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(45, 95, 63, 0.4);
+        }
+
+        /* Título principal */
+        h1 {
+            text-align: center;
+            color: #2d5f3f;
+            padding: 40px 20px;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Grid de productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            color: #2d5f3f;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            color: #4a9d6a;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(135deg, #2d5f3f 0%, #4a9d6a 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(45, 95, 63, 0.3);
+        }
+
+        .add-to-cart:active {
+            transform: translateY(0);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .empty-cart-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .cart-button {
+                top: 10px;
+                right: 10px;
+                padding: 12px 20px;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        
+    </style>
+    <link rel="icon" type="image/png" href="images/logo originall.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navegación -->
+    <nav>
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="Cremas.html">Cremas</a>
+            <a href="Limpiadores.html">Limpiadores</a>
+            <a href="Tonicos.html" class="active">Tónicos</a>
+            <a href="Protectores solares.html">Protectores solares</a>
+            <a href="Serums.html">Sérums</a>
+            <a href="Contorno de ojos.html">Contorno de ojos</a>
+            <a href="Exfoliantes.html">Exfoliantes</a>
+            <a href="Mascarillas.html">Mascarillas</a>
+        </div>
+        <div class="logo">
+            <img src="images/logo originall.png" alt="Logo">
+        </div>
+    </nav>
+
+
+    <h1>Tónicos</h1>
+
+    <!-- Grid de productos -->
+    <div class="products-grid" id="products-grid">
+        <div class="product-card">
+            <img src="images/toni1.avif" alt="Tónico Equilibrante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Tónico Equilibrante</div>
+                <div class="product-description">Equilibra el pH de la piel</div>
+                <div class="product-price">$680</div>
+                <button class="add-to-cart" onclick="addToCart('Tónico Equilibrante', 680)">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/toni3.avif" alt="Tónico Hidratante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Tónico Hidratante</div>
+                <div class="product-description">Hidratación profunda y duradera</div>
+                <div class="product-price">$750</div>
+                <button class="add-to-cart" onclick="addToCart('Tónico Hidratante', 750)">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/toni5.avif" alt="Tónico Purificante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Tónico Purificante</div>
+                <div class="product-description">Limpia poros profundamente</div>
+                <div class="product-price">$820</div>
+                <button class="add-to-cart" onclick="addToCart('Tónico Purificante', 820)">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/toni1.avif" alt="Tónico Iluminador" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Tónico Iluminador</div>
+                <div class="product-description">Aporta brillo y luminosidad</div>
+                <div class="product-price">$890</div>
+                <button class="add-to-cart" onclick="addToCart('Tónico Iluminador', 890)">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/toni3.avif" alt="Tónico Calmante" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Tónico Calmante</div>
+                <div class="product-description">Calma pieles sensibles</div>
+                <div class="product-price">$760</div>
+                <button class="add-to-cart" onclick="addToCart('Tónico Calmante', 760)">Añadir al Carrito</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="images/toni5.avif" alt="Tónico Exfoliante Suave" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Tónico Exfoliante Suave</div>
+                <div class="product-description">Exfoliación química suave</div>
+                <div class="product-price">$920</div>
+                <button class="add-to-cart" onclick="addToCart('Tónico Exfoliante Suave', 920)">Añadir al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+    <script>
+      function addToCart(name, price) {
+        Cart.add({id: name, name: name, price: price});
+      }
+    </script>
+</body>
+</html>
